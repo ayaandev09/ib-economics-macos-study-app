@@ -244,9 +244,9 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
     <>
       <header className="liquid-glass-long-bar !rounded-3xl overflow-hidden p-2.5 sm:p-3 mb-3 flex flex-col gap-2 shadow-xl relative mac-drag-region transition-all z-20 w-full max-w-full">
         {/* Top Segment: Brand (Left) & Controls/Actions (Right) */}
-        <div className="flex items-center justify-between gap-3 w-full pb-2 border-b border-white/10 min-h-[44px]">
-          {/* Brand & Breadcrumbs (Left) */}
-          <div className="flex items-center gap-2 shrink-0 mac-no-drag">
+        <div className="flex items-center justify-between gap-2 w-full pb-2 border-b border-white/10 min-h-[42px] max-w-full overflow-hidden">
+          {/* Brand & Breadcrumbs (Left: Flexible, shrinks cleanly without pushing controls) */}
+          <div className="flex items-center gap-2 min-w-0 shrink mac-no-drag">
             {/* Native macOS Sidebar Toggle (⌘B) */}
             <button
               onClick={toggleSidebar}
@@ -264,7 +264,7 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
             <button
               onClick={() => setDiagnosticsModalOpen(true)}
               title="Click to run live Economics SL Diagnostics"
-              className="flex items-center gap-2 min-w-0 text-left cursor-pointer group shrink-0"
+              className="flex items-center gap-2 min-w-0 text-left cursor-pointer group"
             >
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-teal-400/25 via-indigo-500/20 to-sky-500/25 border border-teal-400/40 flex items-center justify-center p-1 shadow-md relative shrink-0 group-hover:scale-105 transition-transform overflow-hidden">
                 <IBEconomicsAppLogo className="w-full h-full object-contain" />
@@ -280,41 +280,23 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
             </button>
           </div>
 
-          {/* Center: Integrated Spotlight Quick Search Pill */}
-          <button
-            type="button"
-            onClick={openSpotlight}
-            title="Spotlight Search 21 Topics, Diagrams & Cases (⌘K)"
-            className="flex-1 max-w-[220px] 2xl:max-w-xs hidden 2xl:flex items-center justify-between gap-2 px-3 py-1.5 rounded-xl bg-black/50 hover:bg-black/70 border border-white/10 hover:border-teal-400/40 transition-all text-left cursor-pointer group mac-no-drag shadow-inner"
-          >
-            <div className="flex items-center gap-2 min-w-0">
-              <Search className="w-3.5 h-3.5 text-teal-400 group-hover:scale-110 transition-transform shrink-0" />
-              <span className="text-xs text-slate-300 group-hover:text-white transition-colors truncate">
-                Search topics, diagrams...
-              </span>
-            </div>
-            <kbd className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-mono font-bold text-teal-300 bg-teal-500/15 border border-teal-400/25 shrink-0">
-              ⌘K
-            </kbd>
-          </button>
-
-          {/* Right Section: Compact Ergonomic Modality Switchers, Font & Controls */}
-          <div className="flex items-center justify-end gap-1.5 sm:gap-2 shrink-0 mac-no-drag">
-            {/* Quick Spotlight Trigger Button (Compact for non-2xl viewports) */}
+          {/* Right Section: Compact Ergonomic Modality Switchers & Action Pills (Max ~280px total) */}
+          <div className="flex items-center justify-end gap-1.5 shrink-0 mac-no-drag">
+            {/* Quick Spotlight Trigger Button */}
             <button
               onClick={openSpotlight}
               title="Search Topics & Diagrams (⌘K)"
-              className="flex 2xl:hidden items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-black/50 hover:bg-black/70 border border-white/10 hover:border-teal-400/40 text-slate-300 hover:text-white cursor-pointer transition-all"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-black/50 hover:bg-black/70 border border-white/10 hover:border-teal-400/40 text-slate-300 hover:text-white cursor-pointer transition-all shrink-0"
             >
               <Search className="w-3.5 h-3.5 text-teal-400" />
-              <span className="text-[11px] font-medium text-slate-300 hidden sm:inline">Search</span>
+              <span className="text-[11px] font-medium text-slate-300 hidden md:inline">Search</span>
               <kbd className="inline-flex items-center px-1 py-0.2 rounded text-[9px] font-mono font-bold text-teal-300 bg-teal-500/15 border border-teal-400/25">
                 ⌘K
               </kbd>
             </button>
 
             {/* Study Goal / Posture Switcher: Revision vs Study (Compact Segmented Pill) */}
-            <div className="flex items-center p-0.5 rounded-full bg-black/60 border border-white/12 text-xs">
+            <div className="flex items-center p-0.5 rounded-full bg-black/60 border border-white/12 text-xs shrink-0">
               <button
                 onClick={() => setLearningPosture("pre-lesson-cram")}
                 title="Pre-lesson cramming, exam traps & active recall"
@@ -341,67 +323,14 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
               </button>
             </div>
 
-            {/* Academic & Professional Typography Switcher (Shown on wide monitors) */}
-            <div className="hidden 2xl:flex items-center p-0.5 rounded-full bg-black/60 border border-white/12 text-xs">
-              <span className="pl-2 text-slate-400 flex items-center">
-                <BookA className="w-3 h-3 text-sky-400" />
-              </span>
-              <select
-                value={currentAcademicFont}
-                onChange={(e) => {
-                  const val = e.target.value as AcademicStyle;
-                  setAcademicStyle(val);
-                }}
-                title="Academic & Professional Typography Selection"
-                className="bg-transparent text-[11px] font-bold text-sky-200 border-none rounded-full px-2 py-1 focus:outline-none cursor-pointer"
-              >
-                <option value="jakarta" className="bg-slate-900 text-white">
-                  🔬 Jakarta
-                </option>
-                <option value="newsreader" className="bg-slate-900 text-white">
-                  🎓 Newsreader
-                </option>
-                <option value="garamond" className="bg-slate-900 text-white">
-                  🏛️ Garamond
-                </option>
-              </select>
-            </div>
-
-            {/* Pomodoro Focus Timer Pill */}
-            <div className="hidden 2xl:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 border border-white/12 font-mono text-xs text-slate-300">
-              <Clock className="w-3 h-3 text-sky-400" />
-              <span className="font-bold text-white tracking-wider text-[11px]">
-                {formatTimer(timerSeconds)}
-              </span>
-              <button
-                onClick={toggleTimerRunning}
-                className="p-0.5 rounded hover:bg-white/10 text-slate-300 hover:text-white cursor-pointer"
-                title={isTimerRunning ? "Pause Timer" : "Start Focus Timer"}
-              >
-                {isTimerRunning ? (
-                  <Pause className="w-3 h-3 text-amber-400" />
-                ) : (
-                  <Play className="w-3 h-3 text-emerald-400" />
-                )}
-              </button>
-              <button
-                onClick={() => resetTimer(25 * 60)}
-                className="p-0.5 rounded hover:bg-white/10 text-slate-400 hover:text-white cursor-pointer"
-                title="Reset Timer (25 min)"
-              >
-                <RotateCcw className="w-3 h-3" />
-              </button>
-            </div>
-
             {/* Timed Exam Sprint Button */}
             <button
               onClick={openExamSprint}
               title="Launch Timed Exam Sprint (⌘E)"
-              className="hidden sm:flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border bg-teal-500/15 text-teal-200 border-teal-400/35 hover:bg-teal-500/25 shadow-sm soft-button shrink-0"
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border bg-teal-500/15 text-teal-200 border-teal-400/35 hover:bg-teal-500/25 shadow-sm soft-button shrink-0"
             >
               <Timer className="w-3.5 h-3.5 text-teal-300 animate-pulse" />
-              <span className="hidden 2xl:inline text-[11px]">Sprint</span>
-              <span className="text-[10px] font-mono text-teal-400/70">⌘E</span>
+              <span className="text-[10px] font-mono text-teal-400/80">⌘E</span>
             </button>
 
             {/* Pro 3-Column Analytical Inspector Toggle (Shown only when tucked away to prevent collision) */}
@@ -409,26 +338,10 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
               <button
                 onClick={toggleInspector}
                 title="Unfold Analytical Inspector from Top Navigation Bar (⌘I)"
-                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border soft-button shrink-0 bg-teal-950/60 text-teal-300 border-teal-400/40 tucked-pill-beacon-teal"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border soft-button shrink-0 bg-teal-950/60 text-teal-300 border-teal-400/40 tucked-pill-beacon-teal"
               >
                 <TrendingUp className="w-3.5 h-3.5 text-teal-300" />
-                <span className="hidden sm:inline text-[11px]">Inspector</span>
-                <span className="px-1.5 py-0.2 rounded-full bg-teal-400/20 text-[9px] font-mono text-teal-200 uppercase tracking-wider font-semibold border border-teal-300/30">
-                  Tucked
-                </span>
-                <span className="text-[10px] font-mono text-teal-400/70">⌘I</span>
-              </button>
-            )}
-
-            {/* Interactive App Tour / Walkthrough */}
-            {onOpenWalkthrough && (
-              <button
-                onClick={onOpenWalkthrough}
-                title="Interactive App Walkthrough & Guide (Tour)"
-                className="hidden 2xl:flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 border-teal-400/35 shadow-sm soft-button shrink-0"
-              >
-                <Compass className="w-3.5 h-3.5 text-teal-400" />
-                <span className="text-[11px]">Tour</span>
+                <span className="text-[10px] font-mono text-teal-400/80">⌘I</span>
               </button>
             )}
 
@@ -440,22 +353,13 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
             >
               <span className="text-xs font-mono font-bold text-slate-300">?</span>
             </button>
-
-            {/* Mobile Units Index Trigger */}
-            <button
-              onClick={() => setUnitSheetOpen(true)}
-              className="lg:hidden p-2 rounded-full liquid-glass-pill text-sky-200 active:scale-95 cursor-pointer"
-              title="Open Syllabus Index"
-            >
-              <ListFilter className="w-4 h-4 text-sky-300" />
-            </button>
           </div>
         </div>
 
         {/* Row 2: Dedicated Symmetrical Navigation Grid — 100% Adaptive to Any Mac */}
         <nav
           aria-label="Integrated Main Sections Bar"
-          className="w-full grid grid-cols-4 sm:grid-cols-8 gap-1 p-1 bg-black/60 border border-white/12 rounded-2xl shadow-inner relative"
+          className="w-full grid grid-cols-4 sm:grid-cols-8 gap-1 p-1 bg-black/60 border border-white/12 rounded-2xl shadow-inner relative max-w-full overflow-hidden"
         >
           {NAV_MODES.map((mode) => {
             const isActive = viewMode === mode.id;
@@ -463,7 +367,7 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
               <button
                 key={mode.id}
                 onClick={() => setViewMode(mode.id)}
-                className={`relative col-span-1 flex items-center justify-center gap-1.5 py-1.5 sm:py-2 px-1 rounded-xl text-xs font-bold transition-colors cursor-pointer truncate ${
+                className={`relative col-span-1 flex items-center justify-center gap-1.5 py-1.5 sm:py-2 px-1 rounded-xl text-xs font-bold transition-colors cursor-pointer min-w-0 overflow-hidden ${
                   isActive
                     ? "text-teal-200"
                     : "text-slate-400 hover:text-white hover:bg-white/5"
@@ -479,8 +383,7 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
                 <span className={`relative z-10 ${isActive ? "text-teal-300 shrink-0" : "text-slate-400 shrink-0"}`}>
                   {mode.icon}
                 </span>
-                <span className="relative z-10 hidden 2xl:inline truncate">{mode.label}</span>
-                <span className="relative z-10 inline 2xl:hidden truncate">{mode.shortLabel}</span>
+                <span className="relative z-10 text-xs truncate">{mode.shortLabel}</span>
               </button>
             );
           })}

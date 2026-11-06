@@ -196,8 +196,8 @@ blockquote,
     rgba(14, 21, 46, 0.78) 55%,
     rgba(7, 10, 24, 0.93) 100%
   );
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
   border-top: 1px solid var(--glass-border-highlight);
   border-left: 1px solid var(--glass-border-subtle);
   border-right: 1px solid var(--glass-border-subtle);
@@ -304,7 +304,7 @@ blockquote,
 
 .liquid-glass-pill:active,
 .liquid-interactive:active {
-  transform: scale(0.93) translateY(0);
+  transform: scale(0.975) translateY(0);
   transition: transform 0.08s cubic-bezier(0.16, 1, 0.3, 1);
 }
 

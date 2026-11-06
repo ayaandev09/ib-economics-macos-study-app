@@ -2,7 +2,7 @@
 
 import { syncWidgetSnapshot } from "@/lib/widgetBridge";
 import React, { useMemo } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ALL_TOPICS, SYLLABUS_UNITS } from "@/data";
 import { useStudyStore, WidgetTemplateSize } from "@/store/useStudyStore";
 import { IBEconomicsAppLogo } from "./IBEconomicsAppLogo";
@@ -156,6 +156,14 @@ export function StudyMiniHomepage() {
         </div>
       </div>
 
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={widgetTemplate}
+          initial={{ opacity: 0, y: 10, scale: 0.985 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -8, scale: 0.985 }}
+          transition={{ type: "spring", stiffness: 380, damping: 30 }}
+        >
       {/* ========================================================================= */}
       {/* TEMPLATE 1: SMALL / COMPACT GLANCEABLE STRIP */}
       {/* ========================================================================= */}
@@ -461,6 +469,8 @@ export function StudyMiniHomepage() {
           </div>
         </div>
       )}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

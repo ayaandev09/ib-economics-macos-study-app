@@ -1,0 +1,1078 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: var(--active-academic-font);
+  --font-sans: var(--active-academic-sans);
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+:root {
+  color-scheme: dark;
+  --bg-obsidian: #05070f;
+  --bg-midnight: #090d1c;
+  --glass-surface: rgba(255, 255, 255, 0.08);
+  --glass-surface-elevated: rgba(255, 255, 255, 0.12);
+  --glass-border-highlight: rgba(255, 255, 255, 0.38);
+  --glass-border-subtle: rgba(255, 255, 255, 0.16);
+  --glass-border-bottom: rgba(255, 255, 255, 0.06);
+  --glass-specular: inset 0 1.5px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.05);
+  --glass-shadow: 0 18px 44px -8px rgba(0, 0, 0, 0.75),
+    0 4px 14px -2px rgba(0, 0, 0, 0.45);
+
+  /* Academic & Professional Scholarly Typography Stacks (Like 1984 Study App) */
+  --font-newsreader: "Newsreader", "EB Garamond", "Georgia", "Times New Roman", serif;
+  --font-garamond: "EB Garamond", "Newsreader", "Georgia", "Times New Roman", serif;
+  --font-jakarta: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+
+  /* Universal Default Font */
+  --active-academic-font: var(--font-jakarta);
+  --active-academic-sans: var(--font-jakarta);
+
+  /* IB Economics 9 Key Concepts Accent Colors */
+  --accent-scarcity: #f59e0b;        /* Amber */
+  --accent-choice: #a855f7;          /* Violet / Purple */
+  --accent-efficiency: #10b981;      /* Emerald */
+  --accent-equity: #06b6d4;          /* Cyan */
+  --accent-wellbeing: #38bdf8;       /* Sky */
+  --accent-sustainability: #22c55e;  /* Green */
+  --accent-change: #fb923c;          /* Orange / Coral */
+  --accent-interdependence: #6366f1; /* Indigo */
+  --accent-intervention: #f43f5e;    /* Rose / Crimson */
+}
+
+html[data-academic-font="newsreader"],
+:root[data-academic-font="newsreader"],
+html[data-handwritten-style="newsreader"],
+:root[data-handwritten-style="newsreader"] {
+  --active-academic-font: var(--font-newsreader);
+}
+
+html[data-academic-font="garamond"],
+:root[data-academic-font="garamond"],
+html[data-handwritten-style="garamond"],
+:root[data-handwritten-style="garamond"] {
+  --active-academic-font: var(--font-garamond);
+}
+
+html[data-academic-font="jakarta"],
+:root[data-academic-font="jakarta"],
+html[data-handwritten-style="jakarta"],
+:root[data-handwritten-style="jakarta"] {
+  --active-academic-font: var(--font-jakarta);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  background-color: #020308;
+  background-image:
+    radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(168, 85, 247, 0.07) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(244, 63, 94, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: #f1f5f9;
+  font-family: var(--active-academic-font);
+  line-height: 1.62;
+  letter-spacing: 0.005em;
+  overflow-x: hidden;
+  min-height: 100dvh;
+  overscroll-behavior-y: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+p, blockquote {
+  overflow-wrap: break-word;
+}
+
+/* ==================== MAC WIDESCREEN & IPHONE 16e VIEWPORT SHELLS ==================== */
+.mac-dashboard-shell {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  margin-inline: auto;
+  padding: 1.25rem 1.25rem 5rem;
+  position: relative;
+}
+
+/* ==================== NATIVE MACOS WINDOW DRAG REGION ==================== */
+.mac-drag-region {
+  -webkit-app-region: drag;
+}
+
+.mac-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+blockquote,
+.academic-quote,
+.academic-prose {
+  font-family: var(--active-academic-font);
+}
+
+.iphone-16e-shell {
+  width: 100%;
+  max-width: 390px;
+  min-height: 100dvh;
+  margin-inline: auto;
+  background-color: var(--bg-obsidian);
+  padding-top: max(0.75rem, env(safe-area-inset-top));
+  padding-bottom: calc(5.75rem + env(safe-area-inset-bottom, 0px));
+  padding-inline: 0.75rem;
+  position: relative;
+  overflow-x: clip;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 30px 90px rgba(0, 0, 0, 0.9);
+}
+
+/* ==================== STATIC GPU AMBIENT ORBS (ZERO BLUR REPAINT OVERHEAD) ==================== */
+.liquid-ambient-orb {
+  position: fixed;
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 0;
+  contain: strict;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* ==================== APPLE LIQUID GLASS UNIFIED LONG BAR (1984 STYLE) ==================== */
+.liquid-glass-long-bar {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(14, 21, 46, 0.9) 45%,
+    rgba(6, 10, 24, 0.97) 100%
+  );
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+  border-right: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.82),
+    0 0 25px -4px rgba(56, 189, 248, 0.2),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.42),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+  border-radius: 28px;
+  overflow: visible !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
+}
+
+.liquid-glass-long-bar:hover {
+  border-top-color: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 24px 56px -8px rgba(0, 0, 0, 0.9),
+    0 0 30px -2px rgba(56, 189, 248, 0.28),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.55);
+}
+
+/* ==================== HIGH-PERFORMANCE LIQUID GLASS SURFACES (UNISWAP JELLY PHYSICS) ==================== */
+.liquid-glass-bento,
+.jelly-bento {
+  position: relative;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(14, 21, 46, 0.78) 55%,
+    rgba(7, 10, 24, 0.93) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid var(--glass-border-highlight);
+  border-left: 1px solid var(--glass-border-subtle);
+  border-right: 1px solid var(--glass-border-subtle);
+  border-bottom: 1px solid var(--glass-border-bottom);
+  box-shadow: var(--glass-shadow), var(--glass-specular);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  /* Uniswap Spring Jelly Hover Physics */
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.liquid-glass-bento:hover,
+.jelly-bento:hover {
+  transform: translateY(-1px);
+  border-top-color: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 24px 54px -10px rgba(0, 0, 0, 0.88),
+    0 0 24px -2px rgba(56, 189, 248, 0.22),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.48);
+}
+
+.liquid-glass-bento:active,
+.jelly-bento:active {
+  transform: scale(0.982) translateY(0);
+  transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass-sidebar {
+  background: linear-gradient(
+    165deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(13, 19, 44, 0.82) 55%,
+    rgba(6, 9, 22, 0.94) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.38);
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
+  border-right: 1px solid rgba(255, 255, 255, 0.16);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 48px -8px rgba(0, 0, 0, 0.75),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.3);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* ==================== CENTERED LIQUID GLASS DOCK ==================== */
+.liquid-glass-dock {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(15, 23, 48, 0.92) 55%,
+    rgba(7, 11, 26, 0.98) 100%
+  );
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 42px -4px rgba(0, 0, 0, 0.85),
+    0 0 24px -2px rgba(56, 189, 248, 0.25),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.4);
+  contain: layout paint;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s ease,
+              border-color 0.2s ease;
+}
+
+.liquid-glass-dock:hover {
+  transform: translateY(-2px);
+  border-top-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 20px 48px -4px rgba(0, 0, 0, 0.9),
+    0 0 28px -2px rgba(56, 189, 248, 0.35),
+    inset 0 1.5px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* ==================== HIGH-PERFORMANCE LIQUID GLASS PILL (JELLY BOUNCE) ==================== */
+.liquid-glass-pill,
+.liquid-interactive {
+  background: rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.32);
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.22);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.15s ease,
+              border-color 0.2s ease,
+              box-shadow 0.2s ease;
+  will-change: transform;
+}
+
+.liquid-glass-pill:hover,
+.liquid-interactive:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.16);
+  border-top-color: rgba(255, 255, 255, 0.58);
+  box-shadow: 0 8px 22px -4px rgba(0, 0, 0, 0.55),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.38);
+}
+
+.liquid-glass-pill:active,
+.liquid-interactive:active {
+  transform: scale(0.93) translateY(0);
+  transition: transform 0.08s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass-pill-active {
+  background: linear-gradient(
+    135deg,
+    rgba(14, 165, 233, 0.42) 0%,
+    rgba(168, 85, 247, 0.36) 100%
+  );
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+  border-left: 1px solid rgba(56, 189, 248, 0.65);
+  border-right: 1px solid rgba(56, 189, 248, 0.65);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow:
+    0 6px 20px -3px rgba(14, 165, 233, 0.45),
+    0 0 18px rgba(168, 85, 247, 0.3),
+    inset 0 1.2px 0 0 rgba(255, 255, 255, 0.4);
+}
+
+/* ==================== BUTTER-SMOOTH UNISWAP JELLY TRANSITIONS ==================== */
+@keyframes liquidSectionJelly {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.975);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-3px) scale(1.008);
+  }
+  80% {
+    transform: translateY(1.5px) scale(0.996);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.liquid-view-enter {
+  animation: liquidSectionJelly 0.36s cubic-bezier(0.34, 1.3, 0.64, 1) both;
+  will-change: opacity, transform;
+}
+
+@keyframes liquidChapterSwap {
+  0% {
+    opacity: 0.15;
+    transform: translateY(12px) scale(0.985);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.004);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.liquid-chapter-swap {
+  animation: liquidChapterSwap 0.3s cubic-bezier(0.34, 1.3, 0.64, 1) both;
+  will-change: opacity, transform;
+}
+
+@keyframes liquidSpecularPulse {
+  0%, 100% {
+    border-top-color: rgba(255, 255, 255, 0.42);
+  }
+  50% {
+    border-top-color: rgba(255, 255, 255, 0.62);
+  }
+}
+
+.liquid-pulse-rim {
+  animation: liquidSpecularPulse 4s ease-in-out infinite;
+}
+
+/* KaTeX Formula Enhancement */
+.katex-formula-wrapper {
+  font-size: 1.12rem;
+  color: #6ee7b7;
+}
+
+.katex-formula-wrapper .katex-display {
+  margin: 0.4em 0 !important;
+}
+
+.katex .mord.text {
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.katex .frac-line {
+  border-bottom-width: 1.5px !important;
+  border-color: rgba(110, 231, 183, 0.8) !important;
+}
+
+/* Custom Scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(10, 15, 28, 0.7);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+/* ============================================================================
+   macOS & iOS "LIQUID GLASS" SPECULAR REFRACTION ENGINE (APPLE LIQUID GLASS)
+   ============================================================================ */
+
+/* 1. Primary Floating Sidebar Shell */
+.liquid-glass-sidebar {
+  background: rgba(14, 21, 42, 0.88);
+  backdrop-filter: blur(20px) saturate(190%);
+  -webkit-backdrop-filter: blur(20px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 24px 55px -12px rgba(0, 0, 0, 0.8),
+    inset 0 1.5px 0 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.05);
+  transform: translate3d(0, 0, 0);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* 2. Apple Liquid Glass Rounded Long Bar Console (Continuous Capsule) */
+.liquid-glass-section-bar {
+  background: linear-gradient(
+    180deg,
+    rgba(20, 29, 58, 0.92) 0%,
+    rgba(10, 15, 32, 0.96) 100%
+  );
+  backdrop-filter: blur(28px) saturate(210%);
+  -webkit-backdrop-filter: blur(28px) saturate(210%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 20px 50px -10px rgba(0, 0, 0, 0.75),
+    0 0 35px -8px rgba(14, 165, 233, 0.18),
+    inset 0 1.5px 0 0 rgba(255, 255, 255, 0.35),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.08);
+  transform: translate3d(0, 0, 0);
+}
+
+/* 3. Bento Study Card Surface with Uniswap Jelly Reactions */
+.liquid-glass-bento {
+  background: linear-gradient(
+    140deg,
+    rgba(20, 28, 54, 0.88) 0%,
+    rgba(9, 14, 28, 0.95) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 16px 36px -10px rgba(0, 0, 0, 0.65),
+    inset 0 1.2px 0 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 0 rgba(255, 255, 255, 0.05);
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.25s ease,
+              box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.liquid-glass-bento:hover {
+  border-color: rgba(56, 189, 248, 0.35);
+  box-shadow:
+    0 24px 52px -10px rgba(0, 0, 0, 0.8),
+    0 0 28px -4px rgba(14, 165, 233, 0.24),
+    inset 0 1.5px 0 0 rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.liquid-glass-bento:active {
+  transform: translateY(1px) scale(0.985);
+  transition-duration: 0.1s;
+}
+
+/* 4. Floating Bottom Dock Pill */
+.liquid-glass-dock {
+  background: rgba(18, 26, 52, 0.94);
+  backdrop-filter: blur(24px) saturate(200%);
+  -webkit-backdrop-filter: blur(24px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 24px 60px -10px rgba(0, 0, 0, 0.9),
+    0 0 40px -6px rgba(14, 165, 233, 0.25),
+    inset 0 1.5px 0 0 rgba(255, 255, 255, 0.38);
+  transform: translate3d(0, 0, 0);
+}
+
+/* 5. Pills & Interactive Badges with Uniswap Jelly Hover Physics */
+.liquid-glass-pill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+.liquid-glass-pill:hover {
+  background: rgba(255, 255, 255, 0.13);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.liquid-glass-pill:active {
+  transform: translateY(1px) scale(0.95);
+  transition-duration: 0.08s;
+}
+
+.liquid-glass-pill-active {
+  background: linear-gradient(
+    135deg,
+    rgba(14, 165, 233, 0.42) 0%,
+    rgba(168, 85, 247, 0.36) 100%
+  );
+  border: 1px solid rgba(56, 189, 248, 0.65);
+  box-shadow:
+    0 6px 20px -3px rgba(14, 165, 233, 0.45),
+    0 0 18px rgba(168, 85, 247, 0.3),
+    inset 0 1.2px 0 0 rgba(255, 255, 255, 0.4);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+.liquid-glass-pill-active:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow:
+    0 8px 25px -2px rgba(14, 165, 233, 0.55),
+    0 0 22px rgba(168, 85, 247, 0.4),
+    inset 0 1.5px 0 0 rgba(255, 255, 255, 0.5);
+}
+
+.liquid-glass-pill-active:active {
+  transform: translateY(1px) scale(0.95);
+  transition-duration: 0.08s;
+}
+
+/* ============================================================================
+   UNISWAP-STYLE JELLY TACTILE & BOUNCY MICRO-INTERACTION UTILITIES
+   ============================================================================ */
+.jelly-hover {
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s ease,
+              border-color 0.2s ease;
+  will-change: transform;
+}
+
+.jelly-hover:hover {
+  transform: translateY(-1px);
+}
+
+.jelly-hover:active {
+  transform: translateY(1.5px) scale(0.96);
+  transition-duration: 0.08s;
+}
+
+.jelly-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s ease,
+              border-color 0.2s ease;
+  will-change: transform;
+}
+
+.jelly-card:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 20px 40px -10px rgba(0, 0, 0, 0.7),
+    0 0 20px -4px rgba(56, 189, 248, 0.18);
+}
+
+.jelly-card:active {
+  transform: translateY(1.5px) scale(0.975);
+  transition-duration: 0.09s;
+}
+
+.jelly-pill {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              border-color 0.2s ease;
+  will-change: transform;
+}
+
+.jelly-pill:hover {
+  transform: translateY(-1px);
+}
+
+.jelly-pill:active {
+  transform: translateY(1px) scale(0.94);
+  transition-duration: 0.07s;
+}
+
+.jelly-card-interactive {
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.2s ease,
+              box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+.jelly-card-interactive:hover {
+  transform: translateY(-1px);
+}
+
+.jelly-card-interactive:active {
+  transform: scale(0.97);
+  transition-duration: 0.08s;
+}
+
+.jelly-squish {
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.15s ease;
+  will-change: transform;
+}
+
+.jelly-squish:hover {
+  transform: translateY(-1.5px) scale(1.02);
+}
+
+.jelly-squish:active {
+  transform: scale(0.94);
+  transition-duration: 0.08s;
+}
+
+
+
+/* Custom Scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(10, 15, 28, 0.7);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+/* Deferred animations */
+.deferred-chapter-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
+}
+
+/* KaTeX Formula Enhancement */
+.katex-formula-wrapper {
+  font-size: 1.12rem;
+  color: #6ee7b7;
+}
+
+.katex-formula-wrapper .katex-display {
+  margin: 0.4em 0 !important;
+}
+
+.katex .mord.text {
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.katex .frac-line {
+  border-bottom-width: 1.5px !important;
+  border-color: rgba(110, 231, 183, 0.8) !important;
+}
+
+/* Academic & Professional Notes Typography */
+.font-academic-notes {
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+}
+
+.font-handwritten {
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+}
+
+/* Academic Study Note Card Styling (High Academic Rigor & Contrast) */
+.academic-notebook-section {
+  position: relative;
+  background: linear-gradient(145deg, rgba(16, 24, 46, 0.9) 0%, rgba(9, 13, 27, 0.96) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3.5px solid #38bdf8;
+  border-radius: 1.25rem;
+  box-shadow: 0 14px 35px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.academic-notebook-section:hover {
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 18px 45px -12px rgba(0, 0, 0, 0.85), 0 0 24px rgba(56, 189, 248, 0.15);
+  transform: translateY(-2px);
+}
+
+.academic-subpoint-card {
+  background: rgba(16, 24, 48, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.875rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.academic-subpoint-card:hover {
+  background: rgba(24, 36, 68, 0.92);
+  border-color: rgba(56, 189, 248, 0.35);
+  transform: translateY(-2.5px) scale(1.008);
+}
+
+.academic-subpoint-card:active {
+  transform: scale(0.98);
+  transition-duration: 0.08s;
+}
+
+/* ============================================================================
+   UNISWAP-INSPIRED ORGANIC JELLY ENTRANCE & BUTTER-SMOOTH VIEW TRANSITIONS
+   ============================================================================ */
+@keyframes uniswapJellyEnter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0) scale(0.955);
+  }
+  65% {
+    opacity: 0.96;
+    transform: translate3d(0, -3px, 0) scale(1.012);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.smooth-view-enter {
+  animation: uniswapJellyEnter 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+
+.animate-jelly-enter {
+  animation: uniswapJellyEnter 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+
+/* Stagger utilities for Bento and card grids */
+.stagger-1 { animation-delay: 40ms; }
+.stagger-2 { animation-delay: 80ms; }
+.stagger-3 { animation-delay: 120ms; }
+.stagger-4 { animation-delay: 160ms; }
+.stagger-5 { animation-delay: 200ms; }
+.stagger-6 { animation-delay: 240ms; }
+.stagger-7 { animation-delay: 280ms; }
+.stagger-8 { animation-delay: 320ms; }
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+/* Cinematic Startup Stage Fade In & Out Transitions */
+@keyframes stageFadeIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.animate-stage-fade-in {
+  animation: stageFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes shimmerSlide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmerSlide 2.2s infinite ease-in-out;
+}
+
+/* Apple Liquid Buttery Jelly Spring Physics */
+@keyframes liquidJellyIn {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.85, 0.85, 1) translateY(-24px);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale3d(1.05, 0.95, 1) translateY(4px);
+  }
+  75% {
+    transform: scale3d(0.98, 1.02, 1) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1) translateY(0);
+  }
+}
+
+.liquid-jelly-enter {
+  animation: liquidJellyIn 0.62s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Hyper-Reactive Instant Touch & Click */
+button, [role="button"], summary {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+button:active, [role="button"]:active {
+  transform: scale3d(0.95, 0.95, 1) !important;
+  transition: transform 0.06s ease-out !important;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.04);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+
+/* Cinematic Startup Stage Fade In & Out Transitions */
+@keyframes stageFadeIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.animate-stage-fade-in {
+  animation: stageFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes shimmerSlide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmerSlide 2.2s infinite ease-in-out;
+}
+
+/* Apple Liquid Buttery Jelly Spring Physics */
+@keyframes liquidJellyIn {
+  0% {
+    opacity: 0;
+    transform: scale3d(0.85, 0.85, 1) translateY(-24px);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale3d(1.05, 0.95, 1) translateY(4px);
+  }
+  75% {
+    transform: scale3d(0.98, 1.02, 1) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale3d(1, 1, 1) translateY(0);
+  }
+}
+
+.liquid-jelly-enter {
+  animation: liquidJellyIn 0.62s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Hyper-Reactive Instant Touch & Click */
+button, [role="button"], summary {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+}
+
+button:active, [role="button"]:active {
+  transform: scale3d(0.95, 0.95, 1) !important;
+  transition: transform 0.06s ease-out !important;
+}
+
+:root {
+  --theme-bg: #030008;
+  --theme-primary: #9d00ff;
+  --theme-secondary: #00a3ff;
+  --theme-tertiary: #c77dff;
+  --theme-glow: rgba(157, 0, 255, 0.38);
+  --theme-glow-strong: rgba(0, 163, 255, 0.3);
+  --theme-text: #f3e8ff;
+}
+
+html {
+  background-color: #030008;
+}
+
+body {
+  background-color: #030008;
+  background-image:
+    radial-gradient(ellipse at 12% 8%, rgba(157, 0, 255, 0.24) 0%, transparent 46%),
+    radial-gradient(ellipse at 88% 12%, rgba(0, 163, 255, 0.2) 0%, transparent 48%),
+    radial-gradient(ellipse at 50% 108%, rgba(120, 0, 255, 0.2) 0%, transparent 62%),
+    linear-gradient(180deg, #05000b 0%, #0a0318 54%, #020008 100%);
+}
+
+.ultraThinMaterial {
+  background:
+    radial-gradient(120% 120% at 0% 0%, rgba(157, 0, 255, 0.15), transparent 56%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(18, 6, 34, 0.78) 52%, rgba(4, 1, 10, 0.94));
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid rgba(157, 0, 255, 0.26);
+  box-shadow:
+    0 16px 44px -14px rgba(0, 0, 0, 0.94),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.42);
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  transition:
+    background 0.35s ease,
+    border-color 0.25s ease,
+    box-shadow 0.35s ease;
+}
+
+.ultraThinMaterial:hover {
+  background:
+    radial-gradient(120% 120% at 0% 0%, rgba(157, 0, 255, 0.32), transparent 56%),
+    radial-gradient(120% 120% at 100% 100%, rgba(0, 163, 255, 0.26), transparent 62%),
+    linear-gradient(145deg, rgba(243, 232, 255, 0.1), rgba(20, 6, 42, 0.84) 52%, rgba(3, 0, 9, 0.96));
+  border-color: rgba(157, 0, 255, 0.52);
+  box-shadow:
+    0 22px 58px -16px rgba(0, 0, 0, 0.96),
+    0 0 46px -8px rgba(157, 0, 255, 0.54),
+    0 0 58px -18px rgba(0, 163, 255, 0.42),
+    inset 0 1px 0 0 rgba(243, 232, 255, 0.38);
+}
+
+.liquid-glass-bento:hover {
+  box-shadow:
+    0 24px 54px -10px rgba(0, 0, 0, 0.92),
+    0 0 34px -4px rgba(157, 0, 255, 0.36),
+    0 0 50px -12px rgba(0, 163, 255, 0.3),
+    inset 0 1.5px 0 0 rgba(243, 232, 255, 0.44);
+}
+
+.liquid-glass-dock:hover,
+.liquid-glass-longbar:hover {
+  box-shadow:
+    0 24px 56px -10px rgba(0, 0, 0, 0.94),
+    0 0 40px -6px rgba(157, 0, 255, 0.38),
+    inset 0 1.5px 0 0 rgba(243, 232, 255, 0.42);
+}
+
+.market-curve-ad,
+.market-curve-as {
+  will-change: d;
+}
+
+/* ==================== 120 FPS HARDWARE-ACCELERATED LIQUID GLASS CAUSTICS ==================== */
+@keyframes liquidCausticHalo {
+  0% { transform: rotate(0deg) scale(0.96) translateZ(0); opacity: 0.45; }
+  50% { transform: rotate(180deg) scale(1.08) translateZ(0); opacity: 0.72; }
+  100% { transform: rotate(360deg) scale(0.96) translateZ(0); opacity: 0.45; }
+}
+
+.liquid-caustic-halo {
+  animation: liquidCausticHalo 14s linear infinite;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+@keyframes liquidLogoFloat {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(0.98); }
+  50% { transform: translate3d(0, -4px, 0) scale(1.03); }
+}
+
+.liquid-logo-float {
+  animation: liquidLogoFloat 5.2s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+@keyframes liquidGlassSheen {
+  0% { transform: translate3d(-160%, 0, 0) skewX(-20deg); }
+  35%, 100% { transform: translate3d(240%, 0, 0) skewX(-20deg); }
+}
+
+.liquid-glass-sheen {
+  animation: liquidGlassSheen 4.6s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+@keyframes tuckedPillBeaconTeal {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(20, 184, 166, 0.45), 0 0 16px rgba(20, 184, 166, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(20, 184, 166, 0), 0 0 24px rgba(20, 184, 166, 0.55);
+  }
+}
+
+.tucked-pill-beacon-teal {
+  animation: tuckedPillBeaconTeal 2.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.soft-button {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.15s ease, background-color 0.15s ease !important;
+}
+.soft-button:active {
+  transform: scale(0.95) !important;
+}
+

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <!-- Teal Supply Gradient -->
+    <linearGradient id="supplyGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+
+    <!-- Coral Demand Gradient -->
+    <linearGradient id="demandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fca5a5"/>
+      <stop offset="40%" stop-color="#f43f5e"/>
+      <stop offset="100%" stop-color="#e11d48"/>
+    </linearGradient>
+
+    <!-- Equilibrium Gold Radiant Gradient -->
+    <linearGradient id="goldCoord" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+
+    <radialGradient id="econAura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#14b8a6" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#0d9488" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#042f2e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Ambient Equilibrium Radial Aura -->
+  <circle cx="256" cy="256" r="240" fill="url(#econAura)"/>
+
+  <!-- Outer Glass Rim & Precision Coordinates Ring -->
+  <circle cx="256" cy="256" r="230" fill="#07151e" stroke="url(#supplyGrad)" stroke-width="8" stroke-opacity="0.95"/>
+  <circle cx="256" cy="256" r="214" fill="none" stroke="#14b8a6" stroke-width="2" stroke-dasharray="8 8" stroke-opacity="0.6"/>
+
+  <!-- Precision Macroeconomic Cartesian Axes (P vs Q) -->
+  <line x1="120" y1="110" x2="120" y2="390" stroke="#94a3b8" stroke-width="5" stroke-linecap="round"/>
+  <line x1="120" y1="390" x2="400" y2="390" stroke="#94a3b8" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Axis Arrowheads -->
+  <polygon points="120,96 112,116 128,116" fill="#94a3b8"/>
+  <polygon points="414,390 394,382 394,398" fill="#94a3b8"/>
+
+  <!-- Axis Metric Labels -->
+  <text x="96" y="112" font-family="-apple-system, BlinkMacSystemFont, monospace" font-size="22" font-weight="900" fill="#f59e0b">P</text>
+  <text x="402" y="420" font-family="-apple-system, BlinkMacSystemFont, monospace" font-size="22" font-weight="900" fill="#f59e0b">Q</text>
+
+  <!-- Equilibrium Coordinate Projections (Dotted Lines to P* and Q*) -->
+  <line x1="120" y1="250" x2="260" y2="250" stroke="#f59e0b" stroke-width="3" stroke-dasharray="6 6"/>
+  <line x1="260" y1="250" x2="260" y2="390" stroke="#f59e0b" stroke-width="3" stroke-dasharray="6 6"/>
+
+  <circle cx="120" cy="250" r="5" fill="#f59e0b"/>
+  <circle cx="260" cy="390" r="5" fill="#f59e0b"/>
+
+  <!-- Demand Curve D (Bold Downward Coral Trajectory) -->
+  <path
+    d="M 148 140 Q 248 242, 372 360"
+    fill="none"
+    stroke="url(#demandGrad)"
+    stroke-width="16"
+    stroke-linecap="round"
+  />
+
+  <!-- Supply Curve S (Bold Upward Teal Trajectory) -->
+  <path
+    d="M 148 360 Q 248 242, 372 140"
+    fill="none"
+    stroke="url(#supplyGrad)"
+    stroke-width="16"
+    stroke-linecap="round"
+  />
+
+  <!-- Curve End Labels -->
+  <text x="382" y="136" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="24" font-weight="900" fill="#10b981">S</text>
+  <text x="382" y="378" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="24" font-weight="900" fill="#f43f5e">D</text>
+
+  <!-- Equilibrium Center E* (Radiant Diamond Node) -->
+  <circle cx="260" cy="250" r="28" fill="#f59e0b" fill-opacity="0.3"/>
+  <polygon
+    points="260,226 284,250 260,274 236,250"
+    fill="#ffffff"
+    stroke="url(#goldCoord)"
+    stroke-width="5"
+  />
+  <circle cx="260" cy="250" r="6" fill="#07151e"/>
+</svg>

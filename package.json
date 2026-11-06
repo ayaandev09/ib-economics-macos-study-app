@@ -1,0 +1,31 @@
+{
+  "name": "ib-economics-sl-liquid-shell",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3099",
+    "build": "next build",
+    "start": "next start -p 3099"
+  },
+  "dependencies": {
+    "@types/katex": "^0.16.8",
+    "@types/qrcode": "^1.5.6",
+    "framer-motion": "^12.43.0",
+    "katex": "^0.19.1",
+    "lucide-react": "^1.16.0",
+    "next": "^16.0.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zustand": "^5.0.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.3"
+  }
+}

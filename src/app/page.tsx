@@ -2,6 +2,7 @@
 
 import React, { useMemo, useEffect, useState, useCallback } from "react";
 import { AnimatePresence } from "framer-motion";
+import { AmbientAuroraCanvas } from "@/components/AmbientAuroraCanvas";
 import { FloatingSidebar } from "@/components/FloatingSidebar";
 import { TopCommandBar } from "@/components/TopCommandBar";
 import { WidgetBridge } from "@/components/WidgetBridge";
@@ -220,6 +221,7 @@ export default function IBEconomicsSLStudyDashboardPage() {
             : "opacity-0 pointer-events-none select-none"
         }`}
       >
+        <AmbientAuroraCanvas />
         {/* ==================== MAIN SHELL CONTAINER ==================== */}
         <div className="relative z-10 w-full flex flex-col lg:flex-row gap-4 xl:gap-5 items-start">
           {/* Left Floating Sidebar */}

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
+import { motion } from "framer-motion";
 import {
   LayoutGrid,
   Rows3,
@@ -243,7 +244,7 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
     <>
       <header className="liquid-glass-long-bar !rounded-3xl !overflow-visible p-4 mb-4 flex flex-col gap-3 shadow-2xl relative mac-drag-region transition-all z-20">
         {/* Top Segment: Brand (Left) & Controls/Actions (Right) */}
-        <div className="flex flex-wrap items-center justify-between gap-3 w-full pb-2.5 border-b border-white/10 min-h-[44px]">
+        <div className="flex items-center justify-between gap-3 w-full pb-2.5 border-b border-white/10 min-h-[44px]">
           {/* Brand & Breadcrumbs (Left) */}
           <div className="flex items-center gap-2 shrink-0 mac-no-drag">
             {/* Native macOS Sidebar Toggle (⌘B) */}
@@ -279,63 +280,40 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
             </button>
           </div>
 
-          {/* Right Section: Modality Switchers, Font & Controls */}
-          <div className="flex flex-wrap items-center justify-end gap-2 shrink-0 mac-no-drag">
-            {/* Study Goal / Posture Switcher: Revision vs Study */}
-            <div className="flex items-center gap-1 p-1 rounded-full bg-black/50 border border-white/12 text-xs">
-              {learningPosture === "pre-lesson-cram" ? (
-                <ChromaticButton
-                  onClick={() => setLearningPosture("pre-lesson-cram")}
-                  title="Pre-lesson cramming, exam traps & active recall"
-                  color="#d97706"
-                  colorMode="spectrum"
-                  speed={0.7}
-                  hoverEffect="brighten"
-                  className="chromatic-pill !px-3 !py-1.5 text-xs font-bold whitespace-nowrap shadow-md"
-                >
-                  <Zap className="w-3.5 h-3.5 text-amber-200 mr-1" />
-                  <span>Revision</span>
-                </ChromaticButton>
-              ) : (
-                <button
-                  onClick={() => setLearningPosture("pre-lesson-cram")}
-                  title="Pre-lesson cramming, exam traps & active recall"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-slate-400 hover:text-slate-200 transition-all cursor-pointer whitespace-nowrap"
-                >
-                  <Zap className="w-3.5 h-3.5 text-amber-300" />
-                  <span>Revision</span>
-                </button>
-              )}
-
-              {learningPosture === "learn-new" ? (
-                <ChromaticButton
-                  onClick={() => setLearningPosture("learn-new")}
-                  title="First-time guided study with conceptual breakdown"
-                  color="#00802f"
-                  colorMode="spectrum"
-                  speed={0.7}
-                  hoverEffect="brighten"
-                  className="chromatic-pill !px-3 !py-1.5 text-xs font-bold whitespace-nowrap shadow-md"
-                >
-                  <BookOpen className="w-3.5 h-3.5 text-emerald-200 mr-1" />
-                  <span>Study</span>
-                </ChromaticButton>
-              ) : (
-                <button
-                  onClick={() => setLearningPosture("learn-new")}
-                  title="First-time guided study with conceptual breakdown"
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold text-slate-400 hover:text-slate-200 transition-all cursor-pointer whitespace-nowrap"
-                >
-                  <BookOpen className="w-3.5 h-3.5 text-emerald-300" />
-                  <span>Study</span>
-                </button>
-              )}
+          {/* Right Section: Compact Ergonomic Modality Switchers, Font & Controls */}
+          <div className="flex items-center justify-end gap-1.5 sm:gap-2 shrink-0 mac-no-drag">
+            {/* Study Goal / Posture Switcher: Revision vs Study (Compact Segmented Pill) */}
+            <div className="flex items-center p-0.5 rounded-full bg-black/60 border border-white/12 text-xs">
+              <button
+                onClick={() => setLearningPosture("pre-lesson-cram")}
+                title="Pre-lesson cramming, exam traps & active recall"
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                  learningPosture === "pre-lesson-cram"
+                    ? "bg-amber-500/25 text-amber-200 border border-amber-400/40 shadow-sm"
+                    : "text-slate-400 hover:text-slate-200"
+                }`}
+              >
+                <Zap className="w-3 h-3 text-amber-300" />
+                <span className="hidden lg:inline text-[11px]">Revise</span>
+              </button>
+              <button
+                onClick={() => setLearningPosture("learn-new")}
+                title="First-time guided study with conceptual breakdown"
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
+                  learningPosture === "learn-new"
+                    ? "bg-emerald-500/25 text-emerald-200 border border-emerald-400/40 shadow-sm"
+                    : "text-slate-400 hover:text-slate-200"
+                }`}
+              >
+                <BookOpen className="w-3 h-3 text-emerald-300" />
+                <span className="hidden lg:inline text-[11px]">Study</span>
+              </button>
             </div>
 
             {/* Academic & Professional Typography Switcher */}
-            <div className="flex items-center gap-1 p-1 rounded-full bg-black/50 border border-white/12 text-xs">
-              <span className="pl-2.5 text-slate-400 flex items-center gap-1 text-[11px] font-bold">
-                <BookA className="w-3.5 h-3.5 text-sky-400" />
+            <div className="flex items-center p-0.5 rounded-full bg-black/60 border border-white/12 text-xs">
+              <span className="pl-2 text-slate-400 flex items-center">
+                <BookA className="w-3 h-3 text-sky-400" />
               </span>
               <select
                 value={currentAcademicFont}
@@ -344,43 +322,43 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
                   setAcademicStyle(val);
                 }}
                 title="Academic & Professional Typography Selection"
-                className="bg-transparent text-xs font-bold text-sky-200 border-none rounded-full px-2.5 py-1 focus:outline-none cursor-pointer"
+                className="bg-transparent text-[11px] font-bold text-sky-200 border-none rounded-full px-2 py-1 focus:outline-none cursor-pointer"
               >
                 <option value="jakarta" className="bg-slate-900 text-white">
-                  🔬 Modern Jakarta Pro
+                  🔬 Jakarta
                 </option>
                 <option value="newsreader" className="bg-slate-900 text-white">
-                  🎓 Oxford Newsreader
+                  🎓 Newsreader
                 </option>
                 <option value="garamond" className="bg-slate-900 text-white">
-                  🏛️ Classical Garamond
+                  🏛️ Garamond
                 </option>
               </select>
             </div>
 
             {/* Pomodoro Focus Timer Pill */}
-            <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/50 border border-white/12 font-mono text-xs text-slate-300">
-              <Clock className="w-3.5 h-3.5 text-sky-400" />
-              <span className="font-bold text-white tracking-wider">
+            <div className="hidden xl:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/60 border border-white/12 font-mono text-xs text-slate-300">
+              <Clock className="w-3 h-3 text-sky-400" />
+              <span className="font-bold text-white tracking-wider text-[11px]">
                 {formatTimer(timerSeconds)}
               </span>
               <button
                 onClick={toggleTimerRunning}
-                className="p-1 rounded hover:bg-white/10 text-slate-300 hover:text-white cursor-pointer ml-0.5"
+                className="p-0.5 rounded hover:bg-white/10 text-slate-300 hover:text-white cursor-pointer"
                 title={isTimerRunning ? "Pause Timer" : "Start Focus Timer"}
               >
                 {isTimerRunning ? (
-                  <Pause className="w-3.5 h-3.5 text-amber-400" />
+                  <Pause className="w-3 h-3 text-amber-400" />
                 ) : (
-                  <Play className="w-3.5 h-3.5 text-emerald-400" />
+                  <Play className="w-3 h-3 text-emerald-400" />
                 )}
               </button>
               <button
                 onClick={() => resetTimer(25 * 60)}
-                className="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-white cursor-pointer"
+                className="p-0.5 rounded hover:bg-white/10 text-slate-400 hover:text-white cursor-pointer"
                 title="Reset Timer (25 min)"
               >
-                <RotateCcw className="w-3.5 h-3.5" />
+                <RotateCcw className="w-3 h-3" />
               </button>
             </div>
 
@@ -388,11 +366,11 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
             <button
               onClick={openExamSprint}
               title="Launch Timed Exam Sprint (⌘E)"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border bg-teal-500/15 text-teal-200 border-teal-400/35 hover:bg-teal-500/25 shadow-sm"
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border bg-teal-500/15 text-teal-200 border-teal-400/35 hover:bg-teal-500/25 shadow-sm soft-button shrink-0"
             >
               <Timer className="w-3.5 h-3.5 text-teal-300 animate-pulse" />
-              <span className="hidden sm:inline">Exam Sprint</span>
-              <span className="text-[10px] font-mono text-teal-400/70 ml-0.5">⌘E</span>
+              <span className="hidden xl:inline text-[11px]">Sprint</span>
+              <span className="text-[10px] font-mono text-teal-400/70">⌘E</span>
             </button>
 
             {/* Pro 3-Column Analytical Inspector Toggle (Shown only when tucked away to prevent collision) */}
@@ -400,14 +378,14 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
               <button
                 onClick={toggleInspector}
                 title="Unfold Analytical Inspector from Top Navigation Bar (⌘I)"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border soft-button shrink-0 bg-teal-950/60 text-teal-300 border-teal-400/40 tucked-pill-beacon-teal"
+                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border soft-button shrink-0 bg-teal-950/60 text-teal-300 border-teal-400/40 tucked-pill-beacon-teal"
               >
                 <TrendingUp className="w-3.5 h-3.5 text-teal-300" />
-                <span>Inspector</span>
+                <span className="hidden sm:inline text-[11px]">Inspector</span>
                 <span className="px-1.5 py-0.2 rounded-full bg-teal-400/20 text-[9px] font-mono text-teal-200 uppercase tracking-wider font-semibold border border-teal-300/30">
                   Tucked
                 </span>
-                <span className="text-[10px] font-mono text-teal-400/70 ml-0.5">⌘I</span>
+                <span className="text-[10px] font-mono text-teal-400/70">⌘I</span>
               </button>
             )}
 
@@ -416,7 +394,7 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
               <button
                 onClick={onOpenWalkthrough}
                 title="Interactive App Walkthrough & Guide (Tour)"
-                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 border-teal-400/35 shadow-sm soft-button shrink-0"
+                className="hidden sm:flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 border-teal-400/35 shadow-sm soft-button shrink-0"
               >
                 <Compass className="w-3.5 h-3.5 text-teal-400" />
                 <span className="hidden xl:inline text-[11px]">Tour</span>
@@ -427,10 +405,9 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
             <button
               onClick={() => setIsShortcutsOpen((prev) => !prev)}
               title="Keyboard Shortcuts Cheatsheet (?)"
-              className="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border-white/10 shadow-sm soft-button shrink-0"
+              className="flex items-center justify-center w-8 h-8 rounded-full text-xs font-bold transition-all cursor-pointer border bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border-white/10 shadow-sm soft-button shrink-0"
             >
-              <Keyboard className="w-3.5 h-3.5 text-slate-300" />
-              <span className="text-[10px] font-mono text-slate-400">?</span>
+              <span className="text-xs font-mono font-bold text-slate-300">?</span>
             </button>
 
             {/* Mobile Units Index Trigger */}
@@ -447,7 +424,7 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
         {/* Row 2: Dedicated Symmetrical Navigation Grid — 100% Adaptive to Any Mac */}
         <nav
           aria-label="Integrated Main Sections Bar"
-          className="w-full grid grid-cols-4 sm:grid-cols-8 gap-1 p-1 bg-black/60 border border-white/12 rounded-2xl shadow-inner"
+          className="w-full grid grid-cols-4 sm:grid-cols-8 gap-1 p-1 bg-black/60 border border-white/12 rounded-2xl shadow-inner relative"
         >
           {NAV_MODES.map((mode) => {
             const isActive = viewMode === mode.id;
@@ -455,17 +432,24 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
               <button
                 key={mode.id}
                 onClick={() => setViewMode(mode.id)}
-                className={`col-span-1 flex items-center justify-center gap-1.5 py-1.5 sm:py-2 px-1 rounded-xl text-xs font-bold transition-all cursor-pointer truncate ${
+                className={`relative col-span-1 flex items-center justify-center gap-1.5 py-1.5 sm:py-2 px-1 rounded-xl text-xs font-bold transition-colors cursor-pointer truncate ${
                   isActive
-                    ? "bg-teal-500/25 text-teal-200 border border-teal-400/50 shadow-md shadow-teal-500/20"
+                    ? "text-teal-200"
                     : "text-slate-400 hover:text-white hover:bg-white/5"
                 }`}
               >
-                <span className={isActive ? "text-teal-300 shrink-0" : "text-slate-400 shrink-0"}>
+                {isActive && (
+                  <motion.div
+                    layoutId="activeNavTabIndicator"
+                    transition={{ type: "spring", stiffness: 420, damping: 32 }}
+                    className="absolute inset-0 rounded-xl bg-teal-500/25 border border-teal-400/50 shadow-md shadow-teal-500/20 pointer-events-none"
+                  />
+                )}
+                <span className={`relative z-10 ${isActive ? "text-teal-300 shrink-0" : "text-slate-400 shrink-0"}`}>
                   {mode.icon}
                 </span>
-                <span className="hidden 2xl:inline truncate">{mode.label}</span>
-                <span className="inline 2xl:hidden truncate">{mode.shortLabel}</span>
+                <span className="relative z-10 hidden 2xl:inline truncate">{mode.label}</span>
+                <span className="relative z-10 inline 2xl:hidden truncate">{mode.shortLabel}</span>
               </button>
             );
           })}

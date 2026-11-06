@@ -16,6 +16,7 @@ import { ActiveRecallRevisionView } from "@/components/ActiveRecallRevisionView"
 import { FloatingBottomDock } from "@/components/FloatingBottomDock";
 import { StartupDiagnosticsOverlay } from "@/components/StartupDiagnosticsOverlay";
 import { CinematicStartupIntro } from "@/components/CinematicStartupIntro";
+import { ImmersiveAppWalkthrough } from "@/components/ImmersiveAppWalkthrough";
 import { EconomicsRightInspector } from "@/components/EconomicsRightInspector";
 import { TimedExamSprintModal } from "@/components/TimedExamSprintModal";
 import { JellySpotlightModal } from "@/components/JellySpotlightModal";
@@ -60,14 +61,22 @@ export default function IBEconomicsSLStudyDashboardPage() {
     toggleExamSprint,
     isSpotlightOpen,
     closeSpotlight,
+    setLearningPosture,
   } = useStudyStore();
 
   const [isStartupActive, setIsStartupActive] = useState(true);
   const [showMainUI, setShowMainUI] = useState(false);
+  const [isWalkthroughOpen, setIsWalkthroughOpen] = useState(false);
 
   const handleStartupComplete = useCallback(() => {
     setIsStartupActive(false);
     setShowMainUI(true);
+    if (typeof window !== "undefined") {
+      const hasSeen = localStorage.getItem("hasSeenAppWalkthrough_econ_v1");
+      if (!hasSeen) {
+        setIsWalkthroughOpen(true);
+      }
+    }
   }, []);
 
   // Synchronize dynamic scholarly typography engine (1984 style)
@@ -220,7 +229,7 @@ export default function IBEconomicsSLStudyDashboardPage() {
         <main className="flex-1 min-w-0 w-full pb-36">
           {/* Top Command & View Switcher Bar (Unified Long Bar) */}
           <WidgetBridge />
-          <TopCommandBar />
+          <TopCommandBar onOpenWalkthrough={() => setIsWalkthroughOpen(true)} />
 
           {/* Mini Homepage & Live Widget Telemetry Hub */}
           <StudyMiniHomepage />
@@ -495,6 +504,13 @@ export default function IBEconomicsSLStudyDashboardPage() {
       <JellySpotlightModal
         isOpen={isSpotlightOpen}
         onClose={closeSpotlight}
+      />
+
+      {/* Immersive Onboarding Walkthrough Tour */}
+      <ImmersiveAppWalkthrough
+        isOpen={isWalkthroughOpen}
+        onClose={() => setIsWalkthroughOpen(false)}
+        onSelectGoal={(goal) => setLearningPosture(goal === "revise" ? "pre-lesson-cram" : "learn-new")}
       />
     </>
   );

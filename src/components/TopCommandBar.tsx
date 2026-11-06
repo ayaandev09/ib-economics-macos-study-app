@@ -36,6 +36,10 @@ import { ChromaticButton } from "./chromatic-button";
 import { KeyboardShortcutsModal } from "./KeyboardShortcutsModal";
 import { IBEconomicsAppLogo } from "./IBEconomicsAppLogo";
 
+interface TopCommandBarProps {
+  onOpenWalkthrough?: () => void;
+}
+
 interface ViewModeItem {
   id: ViewMode;
   label: string;
@@ -103,7 +107,9 @@ const NAV_MODES: ViewModeItem[] = [
   },
 ];
 
-export const TopCommandBar: React.FC = () => {
+export const TopCommandBar: React.FC<TopCommandBarProps> = ({
+  onOpenWalkthrough,
+}) => {
   const {
     viewMode,
     setViewMode,
@@ -405,6 +411,18 @@ export const TopCommandBar: React.FC = () => {
               </button>
             )}
 
+            {/* Interactive App Tour / Walkthrough */}
+            {onOpenWalkthrough && (
+              <button
+                onClick={onOpenWalkthrough}
+                title="Interactive App Walkthrough & Guide (Tour)"
+                className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border bg-teal-500/10 hover:bg-teal-500/20 text-teal-300 border-teal-400/35 shadow-sm soft-button shrink-0"
+              >
+                <Compass className="w-3.5 h-3.5 text-teal-400" />
+                <span className="hidden xl:inline text-[11px]">Tour</span>
+              </button>
+            )}
+
             {/* Native Shortcuts Cheatsheet Guide (?) */}
             <button
               onClick={() => setIsShortcutsOpen((prev) => !prev)}
@@ -491,6 +509,7 @@ export const TopCommandBar: React.FC = () => {
           onClose={() => setIsShortcutsOpen(false)}
           appName="IB Economics SL Codex"
           accentColor="#0d9488"
+          onOpenTour={onOpenWalkthrough}
         />
       </header>
     </>

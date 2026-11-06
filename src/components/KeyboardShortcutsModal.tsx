@@ -15,6 +15,7 @@ import {
   ArrowLeft,
   ArrowUp,
   TrendingUp,
+  Compass,
 } from "lucide-react";
 
 interface KeyboardShortcutsModalProps {
@@ -22,6 +23,7 @@ interface KeyboardShortcutsModalProps {
   onClose: () => void;
   appName?: string;
   accentColor?: string;
+  onOpenTour?: () => void;
 }
 
 export function KeyboardShortcutsModal({
@@ -29,6 +31,7 @@ export function KeyboardShortcutsModal({
   onClose,
   appName = "IB Economics SL Codex",
   accentColor = "#0d9488",
+  onOpenTour,
 }: KeyboardShortcutsModalProps) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
@@ -221,9 +224,22 @@ export function KeyboardShortcutsModal({
 
           {/* Modal Footer */}
           <div className="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
-            <span className="text-slate-400 font-mono text-[11px]">
-              Press <kbd className="px-1.5 py-0.5 rounded bg-white/10 border border-white/20 text-white text-[10px]">Esc</kbd> to dismiss
-            </span>
+            {onOpenTour ? (
+              <button
+                onClick={() => {
+                  onClose();
+                  onOpenTour();
+                }}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-teal-500/15 hover:bg-teal-500/25 text-teal-300 border border-teal-400/35 transition-all cursor-pointer shadow-sm"
+              >
+                <Compass className="w-3.5 h-3.5 text-teal-400" />
+                <span>Launch Interactive Tour</span>
+              </button>
+            ) : (
+              <span className="text-slate-400 font-mono text-[11px]">
+                Press <kbd className="px-1.5 py-0.5 rounded bg-white/10 border border-white/20 text-white text-[10px]">Esc</kbd> to dismiss
+              </span>
+            )}
             <button
               onClick={onClose}
               className="px-4 py-1.5 rounded-xl text-xs font-bold bg-white/10 hover:bg-white/20 text-white border border-white/15 transition-all cursor-pointer"

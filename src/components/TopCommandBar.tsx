@@ -67,14 +67,14 @@ const NAV_MODES: ViewModeItem[] = [
   {
     id: "diagrams",
     label: "Diagram Lab",
-    shortLabel: "Diagrams",
+    shortLabel: "Lab",
     badge: "29",
     icon: <Layers className="w-3.5 h-3.5" />,
   },
   {
     id: "matrix",
     label: "9 Key Concepts",
-    shortLabel: "Concepts",
+    shortLabel: "Matrix",
     badge: "Matrix",
     icon: <Compass className="w-3.5 h-3.5" />,
   },
@@ -88,14 +88,14 @@ const NAV_MODES: ViewModeItem[] = [
   {
     id: "exam-guide",
     label: "Exam Blueprint",
-    shortLabel: "Blueprint",
+    shortLabel: "Exam",
     badge: "15M",
     icon: <GraduationCap className="w-3.5 h-3.5" />,
   },
   {
     id: "lexicon",
     label: "Lexicon & Formulas",
-    shortLabel: "Lexicon",
+    shortLabel: "Glossary",
     badge: "Bank",
     icon: <Library className="w-3.5 h-3.5" />,
   },
@@ -371,7 +371,7 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
               <button
                 key={mode.id}
                 onClick={() => setViewMode(mode.id)}
-                className={`relative col-span-1 flex items-center justify-center gap-1.5 py-1.5 sm:py-2 px-1 rounded-xl text-xs font-bold transition-colors cursor-pointer min-w-0 overflow-hidden ${
+                className={`relative col-span-1 flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 px-1 rounded-xl text-[11px] 2xl:text-xs font-bold transition-colors cursor-pointer min-w-0 overflow-hidden ${
                   isActive
                     ? "text-teal-200"
                     : "text-slate-400 hover:text-white hover:bg-white/5"

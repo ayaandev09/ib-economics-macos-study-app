@@ -194,8 +194,7 @@ export const CinematicStartupIntro: React.FC<CinematicStartupIntroProps> = ({
       animate={{ opacity: 1 }}
       exit={{
         opacity: 0,
-        filter: "blur(16px)",
-        transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] },
+        transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] },
       }}
       onClick={handleDismiss}
       className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 select-none bg-[#020409] backdrop-blur-2xl overflow-hidden cursor-pointer"
@@ -204,44 +203,29 @@ export const CinematicStartupIntro: React.FC<CinematicStartupIntroProps> = ({
           "radial-gradient(circle at 50% 35%, rgba(13,148,136,0.22) 0%, rgba(2,4,9,0.98) 75%)",
       }}
     >
-      {/* Dynamic Liquid Ambient Aura Blobs */}
-      <motion.div
-        className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-teal-500/15 blur-[110px] pointer-events-none"
-        animate={{
-          scale: [1, 1.15, 1],
-          opacity: [0.14, 0.24, 0.14],
-          x: [0, 24, 0],
-          y: [0, 18, 0],
-        }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+      {/* Static GPU-composited Ambient Aura Blobs (Zero CPU overhead) */}
+      <div
+        className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-teal-500/15 blur-[80px] pointer-events-none"
+        style={{ transform: "translateZ(0)" }}
       />
-      <motion.div
-        className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-cyan-500/12 blur-[110px] pointer-events-none"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.12, 0.20, 0.12],
-          x: [0, -24, 0],
-          y: [0, -18, 0],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+      <div
+        className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-cyan-500/12 blur-[80px] pointer-events-none"
+        style={{ transform: "translateZ(0)" }}
       />
 
       {/* Central Liquid Glass Briefing HUD */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.90, y: 24, filter: "blur(12px)" }}
-        animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
+        initial={{ opacity: 0, scale: 0.95, y: 14 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{
           opacity: 0,
-          scale: 1.04,
-          y: -24,
-          filter: "blur(20px)",
-          transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
+          scale: 0.98,
+          y: -10,
+          transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] },
         }}
         transition={{
-          type: "spring",
-          stiffness: 280,
-          damping: 26,
-          mass: 0.8,
+          duration: 0.4,
+          ease: [0.16, 1, 0.3, 1],
         }}
         onClick={(e) => e.stopPropagation()}
         className="relative w-full max-w-lg p-6 sm:p-7 rounded-[2rem] border border-white/12 ring-1 ring-inset ring-white/10 bg-white/[0.04] dark:bg-black/55 backdrop-blur-2xl shadow-[0_32px_80px_rgba(0,0,0,0.85),inset_0_1px_1px_rgba(255,255,255,0.2),inset_0_0_24px_rgba(255,255,255,0.03)] flex flex-col text-left overflow-hidden cursor-default"

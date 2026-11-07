@@ -224,8 +224,8 @@ export function EconomicsRightInspector({
                     `Evaluate economic effects in ${topic.displayCode}.`
                   }
                   answer={topic.analysis?.coreThesis || topic.summary}
-                  accent="#0D9488"
-                  secondary="#F43F5E"
+                  accent="#1d4ed8"
+                  secondary="#d97706"
                   meta="IB ECON ACTIVE RECALL"
                 />
               </div>

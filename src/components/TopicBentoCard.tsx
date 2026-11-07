@@ -91,8 +91,8 @@ const TopicBentoCardComponent: React.FC<TopicBentoCardProps> = ({
         title={`${topic.displayCode} · ${topic.title}`}
         prompt={topic.examPromptTakeaway || topic.summary}
         answer={topic.analysis.coreThesis || topic.summary}
-        accent="#9D00FF"
-        secondary="#00A3FF"
+        accent="#1d4ed8"
+        secondary="#d97706"
         meta="ACTIVE RECALL"
       />
 
@@ -105,8 +105,8 @@ const TopicBentoCardComponent: React.FC<TopicBentoCardProps> = ({
               Unit {unitNum} • Topic {topic.displayCode}
             </span>
 
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border bg-purple-500/15 border-purple-500/35 text-purple-200">
-              <span className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border bg-blue-500/15 border-blue-500/35 text-blue-200">
+              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
               IMPORTANCE: {topic.strategicImportance}
             </span>
 
@@ -190,9 +190,9 @@ const TopicBentoCardComponent: React.FC<TopicBentoCardProps> = ({
             <span className="text-white truncate">{topic.syllabusRef}</span>
           </div>
           <div className="flex items-center gap-2 text-slate-300">
-            <GraduationCap className="w-4 h-4 text-purple-400 shrink-0" />
+            <GraduationCap className="w-4 h-4 text-blue-400 shrink-0" />
             <span className="text-slate-400 font-medium">Assessment Papers:</span>
-            <span className="text-purple-200 truncate">Paper 1 (10M/15M) &amp; Paper 2 Data Response</span>
+            <span className="text-blue-200 truncate">Paper 1 (10M/15M) &amp; Paper 2 Data Response</span>
           </div>
         </div>
       </div>
@@ -251,12 +251,12 @@ const TopicBentoCardComponent: React.FC<TopicBentoCardProps> = ({
           </div>
 
           {/* Paper 1 & Paper 2 Exam Blueprint (DEED & SLAP) */}
-          <div className="p-5 rounded-2xl bg-purple-950/20 border border-purple-500/25 space-y-4">
+          <div className="p-5 rounded-2xl bg-blue-950/20 border border-blue-500/25 space-y-4">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-xs sm:text-sm uppercase font-bold text-purple-300 flex items-center gap-1.5">
-                <FileText className="w-4 h-4 text-purple-400" /> 15-Mark Essay Exam Blueprint (DEED & SLAP)
+              <span className="font-mono text-xs sm:text-sm uppercase font-bold text-blue-300 flex items-center gap-1.5">
+                <FileText className="w-4 h-4 text-blue-400" /> 15-Mark Essay Exam Blueprint (DEED & SLAP)
               </span>
-              <span className="text-xs font-mono text-purple-300 px-2.5 py-0.5 rounded bg-purple-500/15 border border-purple-500/20">
+              <span className="text-xs font-mono text-blue-300 px-2.5 py-0.5 rounded bg-blue-500/15 border border-blue-500/20">
                 Command: {topic.examBlueprint.commandTerm}
               </span>
             </div>
@@ -291,7 +291,7 @@ const TopicBentoCardComponent: React.FC<TopicBentoCardProps> = ({
                 </p>
               </div>
               <div className="p-3.5 rounded-xl bg-slate-950/60 border border-white/5">
-                <span className="font-mono text-xs uppercase font-bold text-purple-300 block">
+                <span className="font-mono text-xs uppercase font-bold text-blue-300 block">
                   D - Diagram
                 </span>
                 <p className="text-xs sm:text-sm text-slate-200 mt-1.5 leading-relaxed">
@@ -301,8 +301,8 @@ const TopicBentoCardComponent: React.FC<TopicBentoCardProps> = ({
             </div>
 
             {/* SLAP Evaluation Criteria */}
-            <div className="p-3.5 rounded-xl bg-slate-950/70 border border-purple-500/20 text-xs space-y-1">
-              <span className="font-mono text-[10px] font-bold text-purple-300 uppercase">
+            <div className="p-3.5 rounded-xl bg-slate-950/70 border border-blue-500/20 text-xs space-y-1">
+              <span className="font-mono text-[10px] font-bold text-blue-300 uppercase">
                 SLAP Evaluation Framework:
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-slate-300 pt-1">
@@ -417,7 +417,7 @@ const TopicBentoCardComponent: React.FC<TopicBentoCardProps> = ({
           <div className="space-y-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-2.5">
               <h3 className="font-mono text-sm sm:text-base uppercase tracking-wider text-slate-300 font-bold flex items-center gap-2">
-                <BookOpen className="w-4 h-4 text-purple-400" /> First-Principles Syllabus Breakdown
+                <BookOpen className="w-4 h-4 text-blue-400" /> First-Principles Syllabus Breakdown
               </h3>
               <button
                 onClick={() => setUseHandwrittenNotes(!useHandwrittenNotes)}
@@ -475,14 +475,14 @@ const TopicBentoCardComponent: React.FC<TopicBentoCardProps> = ({
                   )}
 
                   {/* Analytical Exam Takeaway */}
-                  <div className="p-4 rounded-2xl bg-purple-950/30 border border-purple-500/25 flex items-start gap-3 shadow-md">
-                    <Lightbulb className="w-5 h-5 text-purple-400 shrink-0 mt-0.5" />
+                  <div className="p-4 rounded-2xl bg-blue-950/30 border border-blue-500/25 flex items-start gap-3 shadow-md">
+                    <Lightbulb className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
                     <div className="space-y-1 min-w-0">
-                      <span className="text-xs font-mono uppercase tracking-wider text-purple-300 font-bold block">
+                      <span className="text-xs font-mono uppercase tracking-wider text-blue-300 font-bold block">
                         Exam Takeaway:
                       </span>
                       <p
-                        className="leading-relaxed text-purple-100 font-sans text-[15px] sm:text-[15.5px] font-normal"
+                        className="leading-relaxed text-blue-100 font-sans text-[15px] sm:text-[15.5px] font-normal"
                       >
                         {sub.analyticalTakeaway}
                       </p>
@@ -539,8 +539,8 @@ const TopicBentoCardComponent: React.FC<TopicBentoCardProps> = ({
           {/* Formative Checkpoints: Check Your Understanding */}
           {topic.checkUnderstanding.length > 0 && (
             <div className="space-y-3 pt-2">
-              <h3 className="font-mono text-xs uppercase tracking-wider text-purple-300 flex items-center gap-2 font-bold">
-                <HelpCircle className="w-4 h-4 text-purple-400" /> Check Your Understanding (Formative Checkpoints)
+              <h3 className="font-mono text-xs uppercase tracking-wider text-blue-300 flex items-center gap-2 font-bold">
+                <HelpCircle className="w-4 h-4 text-blue-400" /> Check Your Understanding (Formative Checkpoints)
               </h3>
               <div className="space-y-3">
                 {topic.checkUnderstanding.map((chk, cIdx) => {
@@ -557,7 +557,7 @@ const TopicBentoCardComponent: React.FC<TopicBentoCardProps> = ({
                         className="w-full p-4 text-left flex items-center justify-between gap-3 hover:bg-white/5 transition-colors cursor-pointer"
                       >
                         <div className="flex items-center gap-2.5">
-                          <span className="font-mono text-xs px-2.5 py-1 rounded-lg bg-purple-500/20 text-purple-300 font-bold shrink-0">
+                          <span className="font-mono text-xs px-2.5 py-1 rounded-lg bg-blue-500/20 text-blue-300 font-bold shrink-0">
                             Q{cIdx + 1}
                           </span>
                           <span className="text-sm sm:text-base font-bold text-white leading-snug">
@@ -565,14 +565,14 @@ const TopicBentoCardComponent: React.FC<TopicBentoCardProps> = ({
                           </span>
                         </div>
                         {isOpen ? (
-                          <ChevronUp className="w-5 h-5 text-purple-400 shrink-0" />
+                          <ChevronUp className="w-5 h-5 text-blue-400 shrink-0" />
                         ) : (
                           <ChevronDown className="w-5 h-5 text-slate-500 shrink-0" />
                         )}
                       </button>
 
                       {isOpen && (
-                        <div className="p-5 pt-2 border-t border-white/5 bg-purple-950/15 space-y-3.5 text-xs sm:text-sm animate-in fade-in duration-150">
+                        <div className="p-5 pt-2 border-t border-white/5 bg-blue-950/15 space-y-3.5 text-xs sm:text-sm animate-in fade-in duration-150">
                           {/* Hints */}
                           {chk.hints.length > 0 && (
                             <div className="flex flex-wrap items-center gap-2">

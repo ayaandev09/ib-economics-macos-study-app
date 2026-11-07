@@ -386,7 +386,7 @@ export default function IBEconomicsSLStudyDashboardPage() {
                         <p className="text-[11px] text-slate-300 leading-relaxed mb-2 line-clamp-3">
                           {u.overview}
                         </p>
-                        <p className="text-[10px] font-mono text-purple-300/90 line-clamp-1">
+                        <p className="text-[10px] font-mono text-blue-300/90 line-clamp-1">
                           {u.strategicArc}
                         </p>
                       </div>

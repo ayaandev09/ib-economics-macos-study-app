@@ -513,16 +513,22 @@ button[disabled],
 
 /* 3. Bento Study Card Surface with Uniswap Jelly Reactions */
 .liquid-glass-bento {
-  background: linear-gradient(
-    140deg,
-    rgba(20, 28, 54, 0.88) 0%,
-    rgba(9, 14, 28, 0.95) 100%
-  );
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background:
+    radial-gradient(120% 120% at 0% 0%, rgba(29, 78, 216, 0.15), transparent 56%),
+    linear-gradient(
+      140deg,
+      rgba(255, 255, 255, 0.075) 0%,
+      rgba(10, 20, 44, 0.78) 52%,
+      rgba(2, 4, 12, 0.96) 100%
+    );
+  backdrop-filter: blur(18px) saturate(170%);
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  border: 1px solid rgba(147, 197, 253, 0.22);
   box-shadow:
-    0 16px 36px -10px rgba(0, 0, 0, 0.65),
+    0 16px 36px -10px rgba(0, 0, 0, 0.85),
+    0 0 28px -4px rgba(29, 78, 216, 0.18),
     inset 0 1.2px 0 0 rgba(255, 255, 255, 0.22),
-    inset 0 -1px 0 0 rgba(255, 255, 255, 0.05);
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.4);
   transform: translate3d(0, 0, 0);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.25s ease,
@@ -531,11 +537,12 @@ button[disabled],
 }
 
 .liquid-glass-bento:hover {
-  border-color: rgba(56, 189, 248, 0.35);
+  border-color: rgba(147, 197, 253, 0.48);
   box-shadow:
-    0 24px 52px -10px rgba(0, 0, 0, 0.8),
-    0 0 28px -4px rgba(14, 165, 233, 0.24),
-    inset 0 1.5px 0 0 rgba(255, 255, 255, 0.35);
+    0 24px 52px -10px rgba(0, 0, 0, 0.92),
+    0 0 34px -4px rgba(29, 78, 216, 0.38),
+    0 0 46px -12px rgba(217, 119, 6, 0.25),
+    inset 0 1.5px 0 0 rgba(239, 246, 255, 0.35);
   transform: translateY(-1px);
 }
 
@@ -981,39 +988,39 @@ summary {
 }
 
 :root {
-  --theme-bg: #030008;
-  --theme-primary: #9d00ff;
-  --theme-secondary: #00a3ff;
-  --theme-tertiary: #c77dff;
-  --theme-glow: rgba(157, 0, 255, 0.38);
-  --theme-glow-strong: rgba(0, 163, 255, 0.3);
-  --theme-text: #f3e8ff;
+  --theme-bg: #02040a;
+  --theme-primary: #1d4ed8;
+  --theme-secondary: #d97706;
+  --theme-tertiary: #2563eb;
+  --theme-glow: rgba(29, 78, 216, 0.38);
+  --theme-glow-strong: rgba(217, 119, 6, 0.32);
+  --theme-text: #eff6ff;
 }
 
 html {
-  background-color: #030008;
+  background-color: #02040a;
 }
 
 body {
-  background-color: #030008;
+  background-color: #02040a;
   background-image:
-    radial-gradient(ellipse at 12% 8%, rgba(157, 0, 255, 0.24) 0%, transparent 46%),
-    radial-gradient(ellipse at 88% 12%, rgba(0, 163, 255, 0.2) 0%, transparent 48%),
-    radial-gradient(ellipse at 50% 108%, rgba(120, 0, 255, 0.2) 0%, transparent 62%),
-    linear-gradient(180deg, #05000b 0%, #0a0318 54%, #020008 100%);
+    radial-gradient(ellipse at 12% 8%, rgba(29, 78, 216, 0.32) 0%, transparent 46%),
+    radial-gradient(ellipse at 88% 12%, rgba(217, 119, 6, 0.22) 0%, transparent 46%),
+    radial-gradient(ellipse at 50% 108%, rgba(30, 64, 175, 0.35) 0%, transparent 62%),
+    linear-gradient(180deg, #02040a 0%, #060e22 52%, #02040a 100%);
 }
 
 .ultraThinMaterial {
   background:
-    radial-gradient(120% 120% at 0% 0%, rgba(157, 0, 255, 0.15), transparent 56%),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(18, 6, 34, 0.78) 52%, rgba(4, 1, 10, 0.94));
-  backdrop-filter: blur(18px) saturate(180%);
-  -webkit-backdrop-filter: blur(18px) saturate(180%);
-  border: 1px solid rgba(157, 0, 255, 0.26);
+    radial-gradient(120% 120% at 0% 0%, rgba(29, 78, 216, 0.15), transparent 56%),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.075), rgba(10, 20, 44, 0.74) 52%, rgba(2, 4, 10, 0.94));
+  backdrop-filter: blur(18px) saturate(175%);
+  -webkit-backdrop-filter: blur(18px) saturate(175%);
+  border: 1px solid rgba(147, 197, 253, 0.22);
   box-shadow:
-    0 16px 44px -14px rgba(0, 0, 0, 0.94),
+    0 16px 44px -14px rgba(0, 0, 0, 0.92),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.16),
-    inset 0 -1px 0 0 rgba(0, 0, 0, 0.42);
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.4);
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
   transition:
@@ -1024,31 +1031,66 @@ body {
 
 .ultraThinMaterial:hover {
   background:
-    radial-gradient(120% 120% at 0% 0%, rgba(157, 0, 255, 0.32), transparent 56%),
-    radial-gradient(120% 120% at 100% 100%, rgba(0, 163, 255, 0.26), transparent 62%),
-    linear-gradient(145deg, rgba(243, 232, 255, 0.1), rgba(20, 6, 42, 0.84) 52%, rgba(3, 0, 9, 0.96));
-  border-color: rgba(157, 0, 255, 0.52);
+    radial-gradient(120% 120% at 0% 0%, rgba(29, 78, 216, 0.32), transparent 56%),
+    radial-gradient(120% 120% at 100% 100%, rgba(217, 119, 6, 0.24), transparent 62%),
+    linear-gradient(145deg, rgba(239, 246, 255, 0.11), rgba(14, 28, 62, 0.82) 52%, rgba(3, 7, 16, 0.95));
+  border-color: rgba(147, 197, 253, 0.48);
   box-shadow:
-    0 22px 58px -16px rgba(0, 0, 0, 0.96),
-    0 0 46px -8px rgba(157, 0, 255, 0.54),
-    0 0 58px -18px rgba(0, 163, 255, 0.42),
-    inset 0 1px 0 0 rgba(243, 232, 255, 0.38);
+    0 22px 58px -16px rgba(0, 0, 0, 0.95),
+    0 0 44px -8px rgba(29, 78, 216, 0.55),
+    0 0 50px -14px rgba(217, 119, 6, 0.35),
+    inset 0 1px 0 0 rgba(239, 246, 255, 0.36);
 }
 
 .liquid-glass-bento:hover {
   box-shadow:
-    0 24px 54px -10px rgba(0, 0, 0, 0.92),
-    0 0 34px -4px rgba(157, 0, 255, 0.36),
-    0 0 50px -12px rgba(0, 163, 255, 0.3),
-    inset 0 1.5px 0 0 rgba(243, 232, 255, 0.44);
+    0 24px 54px -10px rgba(0, 0, 0, 0.9),
+    0 0 32px -4px rgba(29, 78, 216, 0.4),
+    0 0 48px -12px rgba(217, 119, 6, 0.3),
+    inset 0 1.5px 0 0 rgba(239, 246, 255, 0.42);
 }
 
 .liquid-glass-dock:hover,
 .liquid-glass-longbar:hover {
   box-shadow:
-    0 24px 56px -10px rgba(0, 0, 0, 0.94),
-    0 0 40px -6px rgba(157, 0, 255, 0.38),
-    inset 0 1.5px 0 0 rgba(243, 232, 255, 0.42);
+    0 24px 56px -10px rgba(0, 0, 0, 0.92),
+    0 0 38px -6px rgba(29, 78, 216, 0.4),
+    inset 0 1.5px 0 0 rgba(239, 246, 255, 0.4);
+}
+
+/* ==================== VISIONOS PER-CARD CURSOR SPECULAR SPOTLIGHT ==================== */
+.liquid-glass-bento,
+.liquid-card-flagship,
+.ultraThinMaterial {
+  position: relative;
+  transition:
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.28s ease,
+    box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.liquid-glass-bento::after,
+.liquid-card-flagship::after,
+.ultraThinMaterial::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    460px circle at var(--card-mouse-x, 50%) var(--card-mouse-y, 0%),
+    rgba(147, 197, 253, 0.085),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.liquid-glass-bento:hover::after,
+.liquid-card-flagship:hover::after,
+.ultraThinMaterial:hover::after {
+  opacity: 1;
 }
 
 .market-curve-ad,

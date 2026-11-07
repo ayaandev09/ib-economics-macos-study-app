@@ -20,8 +20,8 @@ export function RecallFlipCard({
   title,
   prompt,
   answer,
-  accent = "#14b8a6",
-  secondary = "#0284c7",
+  accent = "#1d4ed8",
+  secondary = "#d97706",
   meta = "ACTIVE RECALL",
 }: RecallFlipCardProps) {
   const [flipped, setFlipped] = useState(false);
@@ -86,9 +86,9 @@ export function RecallFlipCard({
               animate={{ rotateY: 0, opacity: 1, scale: 1 }}
               exit={{ rotateY: 80, opacity: 0, scale: 0.97 }}
               transition={{ type: "spring", stiffness: 320, damping: 28 }}
-              className="ultraThinMaterial relative min-h-[176px] w-full flex flex-col justify-between overflow-hidden rounded-3xl p-5 shadow-2xl border border-white/15 group-hover:border-teal-400/45 transition-colors"
+              className="ultraThinMaterial relative min-h-[176px] w-full flex flex-col justify-between overflow-hidden rounded-3xl p-5 shadow-2xl border border-white/15 group-hover:border-blue-400/45 transition-colors"
               style={{
-                backgroundImage: `radial-gradient(120% 140% at ${tilt.glareX}% ${tilt.glareY}%, ${accent}38, transparent 58%), linear-gradient(145deg, rgba(255,255,255,0.07), rgba(6,10,18,0.88))`,
+                backgroundImage: `radial-gradient(120% 140% at ${tilt.glareX}% ${tilt.glareY}%, ${accent}38, transparent 58%), linear-gradient(145deg, rgba(255,255,255,0.075), rgba(6,10,22,0.92))`,
               }}
             >
               <div
@@ -104,7 +104,7 @@ export function RecallFlipCard({
                     className="inline-flex items-center gap-1.5 rounded-xl border px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.16em] shadow-sm"
                     style={{
                       borderColor: `${accent}88`,
-                      color: "#99f6e4",
+                      color: "#bfdbfe",
                       backgroundColor: `${accent}26`,
                     }}
                   >
@@ -117,8 +117,8 @@ export function RecallFlipCard({
                     </span>
                   )}
                 </div>
-                <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400 group-hover:text-teal-300 transition-colors flex items-center gap-1">
-                  <Zap className="w-3 h-3 text-teal-400" /> Interactive 3D Flip
+                <span className="font-mono text-[10px] uppercase tracking-wider text-slate-400 group-hover:text-blue-300 transition-colors flex items-center gap-1">
+                  <Zap className="w-3 h-3 text-blue-400" /> Interactive 3D Flip
                 </span>
               </div>
 
@@ -132,7 +132,7 @@ export function RecallFlipCard({
               </div>
 
               <div className="relative z-10 mt-4 flex items-center justify-between border-t border-white/10 pt-3">
-                <span className="flex items-center gap-1.5 font-mono text-[11px] text-teal-200/90 group-hover:text-white transition-colors">
+                <span className="flex items-center gap-1.5 font-mono text-[11px] text-blue-200/90 group-hover:text-white transition-colors">
                   <RotateCcw className="h-3.5 w-3.5 group-hover:rotate-180 transition-transform duration-500" style={{ color: accent }} />
                   Click or press Space to reveal DEED model synthesis
                 </span>
@@ -151,14 +151,14 @@ export function RecallFlipCard({
               animate={{ rotateY: 0, opacity: 1, scale: 1 }}
               exit={{ rotateY: 80, opacity: 0, scale: 0.97 }}
               transition={{ type: "spring", stiffness: 320, damping: 28 }}
-              className="ultraThinMaterial relative min-h-[176px] w-full flex flex-col justify-between overflow-hidden rounded-3xl p-5 shadow-2xl border border-teal-400/50"
+              className="ultraThinMaterial relative min-h-[176px] w-full flex flex-col justify-between overflow-hidden rounded-3xl p-5 shadow-2xl border border-blue-400/50"
               style={{
-                backgroundImage: `radial-gradient(120% 140% at ${tilt.glareX}% ${tilt.glareY}%, ${secondary}44, transparent 60%), linear-gradient(145deg, rgba(255,255,255,0.07), rgba(4,12,18,0.92))`,
+                backgroundImage: `radial-gradient(120% 140% at ${tilt.glareX}% ${tilt.glareY}%, ${secondary}44, transparent 60%), linear-gradient(145deg, rgba(255,255,255,0.075), rgba(4,10,22,0.94))`,
               }}
             >
               <div className="relative z-10 flex items-center justify-between gap-3">
-                <span className="inline-flex items-center gap-1.5 rounded-xl bg-teal-500/20 border border-teal-400/40 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-teal-200">
-                  <Flame className="w-3 h-3 text-teal-400" /> Examiner Model Synthesis · {moduleCode}
+                <span className="inline-flex items-center gap-1.5 rounded-xl bg-blue-500/20 border border-blue-400/40 px-2.5 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-blue-200">
+                  <Flame className="w-3 h-3 text-amber-400" /> Examiner Model Synthesis · {moduleCode}
                 </span>
                 <span className="font-mono text-[10px] uppercase tracking-wider text-slate-300">
                   Click to flip back
@@ -193,7 +193,7 @@ export function RecallFlipCard({
                     onClick={() => setConfidence("good")}
                     className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold border transition-all cursor-pointer ${
                       confidence === "good"
-                        ? "bg-teal-500/30 border-teal-400 text-teal-200"
+                        ? "bg-amber-500/30 border-amber-400 text-amber-200"
                         : "bg-white/5 border-white/10 text-slate-300 hover:text-white"
                     }`}
                   >

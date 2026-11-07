@@ -7,6 +7,7 @@ import { RecallFlipCard } from "@/components/RecallFlipCard";
 import { InteractiveDiagram } from "./InteractiveDiagram";
 import { MathFormula } from "./MathFormula";
 import { AcademicNotesRenderer } from "./AcademicNotesRenderer";
+import { AcademicNotesSurface } from "./AcademicNotesSurface";
 import {
   GraduationCap,
   Zap,
@@ -668,28 +669,15 @@ const TopicBentoCardComponent: React.FC<TopicBentoCardProps> = ({
 
       {/* Note Editor Dropdown */}
       {showNoteEditor && (
-        <div className="mt-3 p-3 rounded-2xl bg-slate-950/80 border border-white/10 space-y-2 animate-in fade-in duration-150">
-          <textarea
-            value={noteInput}
-            onChange={(e) => setNoteInput(e.target.value)}
-            placeholder="Type your personal revision note, mnemonic, or teacher commentary for this topic..."
-            rows={3}
-            className="w-full p-2.5 rounded-xl bg-slate-900 border border-white/10 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-sky-500/50"
+        <div className="mt-3 animate-in fade-in duration-150">
+          <AcademicNotesSurface
+            note={topicNotes[topic.id] || ""}
+            onChange={(text) => saveTopicNote(topic.id, text)}
+            title="Personal Study & Policy Marginalia"
+            itemCode={topic.displayCode || topic.topicCode}
+            accentColor="#0ea5e9"
+            minRows={4}
           />
-          <div className="flex justify-end gap-2">
-            <button
-              onClick={() => setShowNoteEditor(false)}
-              className="px-3 py-1 rounded-lg text-xs text-slate-400 hover:text-white cursor-pointer"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={handleSaveNote}
-              className="px-3 py-1 rounded-lg text-xs font-mono font-semibold bg-sky-500 text-slate-950 hover:bg-sky-400 cursor-pointer"
-            >
-              Save Note
-            </button>
-          </div>
         </div>
       )}
     </article>

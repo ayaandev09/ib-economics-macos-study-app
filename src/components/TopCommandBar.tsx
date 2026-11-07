@@ -242,7 +242,10 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
 
   return (
     <>
-      <header className="liquid-glass-long-bar !rounded-3xl overflow-hidden p-2.5 sm:p-3 mb-3 flex flex-col gap-2 shadow-xl relative mac-drag-region transition-all z-20 w-full max-w-full">
+      <header
+        data-tour="command-bar"
+        className="liquid-glass-long-bar !rounded-3xl overflow-hidden p-2.5 sm:p-3 mb-3 flex flex-col gap-2 shadow-xl relative mac-drag-region transition-all z-20 w-full max-w-full"
+      >
         {/* Top Segment: Brand (Left) & Controls/Actions (Right) */}
         <div className="flex items-center justify-between gap-2 w-full pb-2 border-b border-white/10 min-h-[42px] max-w-full overflow-hidden">
           {/* Brand & Breadcrumbs (Left: Flexible, shrinks cleanly without pushing controls) */}
@@ -358,6 +361,7 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
 
         {/* Row 2: Dedicated Symmetrical Navigation Grid — 100% Adaptive to Any Mac */}
         <nav
+          data-tour="nav-tabs"
           aria-label="Integrated Main Sections Bar"
           className="w-full grid grid-cols-4 sm:grid-cols-8 gap-1 p-1 bg-black/60 border border-white/12 rounded-2xl shadow-inner relative max-w-full overflow-hidden"
         >

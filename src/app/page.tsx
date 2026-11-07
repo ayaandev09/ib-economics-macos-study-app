@@ -268,7 +268,7 @@ export default function IBEconomicsSLStudyDashboardPage() {
                 </div>
 
                 {/* Active Topic Bento Grid with Buttery Smooth Swap */}
-                <div key={activeTopic.id} className="liquid-chapter-swap">
+                <div key={activeTopic.id} data-tour="study-bento" className="liquid-chapter-swap">
                   <TopicBentoCard
                     topic={activeTopic}
                     showPrevNextControls={true}
@@ -520,6 +520,10 @@ export default function IBEconomicsSLStudyDashboardPage() {
         isOpen={isWalkthroughOpen}
         onClose={() => setIsWalkthroughOpen(false)}
         onSelectGoal={(goal) => setLearningPosture(goal === "revise" ? "pre-lesson-cram" : "learn-new")}
+        isInspectorOpen={isInspectorOpen}
+        onOpenInspector={() => {
+          if (!isInspectorOpen) toggleInspector();
+        }}
       />
     </>
   );

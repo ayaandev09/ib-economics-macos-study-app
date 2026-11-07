@@ -360,6 +360,7 @@ export const FloatingSidebar: React.FC<FloatingSidebarProps> = React.memo(({
   // Desktop Floating Sidebar (Exact Apple HIG Proportions with Collapse Support)
   return (
     <aside
+      data-tour="sidebar"
       className={`hidden lg:flex shrink-0 lg:sticky lg:top-5 lg:h-[calc(100vh-2.5rem)] flex-col liquid-glass-sidebar rounded-3xl p-4 overflow-hidden select-none z-20 transition-all duration-300 ${
         sidebarCollapsed ? "w-20 items-center px-2" : "w-64 xl:w-72"
       }`}

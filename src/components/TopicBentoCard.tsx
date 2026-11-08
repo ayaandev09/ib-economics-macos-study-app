@@ -266,7 +266,7 @@ const TopicBentoCardComponent: React.FC<TopicBentoCardProps> = ({
             </p>
 
             {/* DEED Structure Breakdown */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 pt-2">
+            <div className="bento-adaptive-4 pt-2">
               <div className="p-3.5 rounded-xl bg-slate-950/60 border border-white/5">
                 <span className="font-mono text-xs uppercase font-bold text-sky-300 block">
                   D - Define

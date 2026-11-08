@@ -142,19 +142,17 @@ export const FloatingSidebar: React.FC<FloatingSidebarProps> = React.memo(({
             >
               <IBEconomicsAppLogo className="w-full h-full object-contain" />
             </button>
-            {!sidebarCollapsed && (
-              <div className="min-w-0">
-                <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-sky-400 block font-mono truncate">
-                  IB ECON SL // 2026
-                </span>
-                <h2 className="text-sm font-bold text-white tracking-tight truncate">
-                  Economics SL Codex
-                </h2>
-              </div>
-            )}
+            <div className="min-w-0">
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-sky-400 block font-mono truncate">
+                IB ECON SL // 2026
+              </span>
+              <h2 className="text-sm font-bold text-white tracking-tight truncate">
+                Economics SL Codex
+              </h2>
+            </div>
           </div>
 
-          {!sidebarCollapsed && totalCompleted > 0 && (
+          {totalCompleted > 0 && (
             <button
               onClick={resetAllProgress}
               title="Reset progress"
@@ -166,9 +164,7 @@ export const FloatingSidebar: React.FC<FloatingSidebarProps> = React.memo(({
         </div>
       )}
 
-      {!sidebarCollapsed && (
-        <>
-          {/* Speed-Read & Progress Telemetry Bar (Matching Business Management Blueprint) */}
+      {/* Speed-Read & Progress Telemetry Bar (Matching Business Management Blueprint) */}
           <div className="liquid-glass-bento rounded-2xl p-3 mb-3 shrink-0">
         <div className="flex items-center justify-between text-xs mb-2">
           <span className="text-slate-300 font-medium flex items-center gap-1.5">
@@ -334,8 +330,6 @@ export const FloatingSidebar: React.FC<FloatingSidebarProps> = React.memo(({
           </span>
         </div>
       )}
-        </>
-      )}
     </>
   );
 
@@ -361,11 +355,19 @@ export const FloatingSidebar: React.FC<FloatingSidebarProps> = React.memo(({
   return (
     <aside
       data-tour="sidebar"
-      className={`hidden lg:flex shrink-0 lg:sticky lg:top-5 lg:h-[calc(100vh-2.5rem)] flex-col liquid-glass-sidebar rounded-3xl p-4 overflow-hidden select-none z-20 transition-all duration-300 ${
-        sidebarCollapsed ? "w-20 items-center px-2" : "w-64 xl:w-72"
+      className={`hidden lg:flex shrink-0 lg:sticky lg:top-5 lg:h-[calc(100vh-2.5rem)] flex-col liquid-glass-sidebar rounded-3xl overflow-hidden select-none z-20 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        sidebarCollapsed
+          ? "w-0 max-w-0 p-0 -mr-4 xl:-mr-5 border-0 opacity-0 pointer-events-none"
+          : "w-64 xl:w-72 p-4 opacity-100"
       }`}
     >
-      {content}
+      <div
+        className={`w-64 xl:w-72 flex flex-col h-full min-h-0 shrink-0 transition-opacity duration-200 ${
+          sidebarCollapsed ? "opacity-0 pointer-events-none invisible" : "opacity-100 visible"
+        }`}
+      >
+        {content}
+      </div>
     </aside>
   );
 });

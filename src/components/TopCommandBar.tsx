@@ -256,7 +256,7 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
               title={sidebarCollapsed ? "Expand Topic Navigation Sidebar (⌘B)" : "Collapse Sidebar for Wide View (⌘B)"}
               className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all cursor-pointer soft-button shrink-0 border ${
                 sidebarCollapsed
-                  ? "bg-teal-500/20 text-teal-300 border-teal-400/40 shadow-sm"
+                  ? "bg-amber-500/20 text-amber-300 border-amber-400/40 shadow-sm"
                   : "bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border-white/10"
               }`}
             >
@@ -269,14 +269,14 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
               title="Click to run live Economics SL Diagnostics"
               className="flex items-center gap-2 min-w-0 text-left cursor-pointer group"
             >
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-teal-400/25 via-indigo-500/20 to-sky-500/25 border border-teal-400/40 flex items-center justify-center p-1 shadow-md relative shrink-0 group-hover:scale-105 transition-transform overflow-hidden">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-500/25 via-red-950/20 to-emerald-500/25 border border-amber-400/40 flex items-center justify-center p-1 shadow-md relative shrink-0 group-hover:scale-105 transition-transform overflow-hidden">
                 <IBEconomicsAppLogo className="w-full h-full object-contain" />
               </div>
               <div className="min-w-0 leading-tight">
-                <span className="text-[9px] font-mono font-bold tracking-[0.2em] text-sky-400 uppercase block truncate">
+                <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-amber-400 uppercase block truncate">
                   EQUILIBRIUM // IB ECON SL
                 </span>
-                <span className="text-xs font-semibold text-white tracking-tight block truncate">
+                <span className="text-xs sm:text-sm font-semibold text-white tracking-tight block truncate">
                   Economics SL Codex
                 </span>
               </div>
@@ -289,11 +289,11 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
             <button
               onClick={openSpotlight}
               title="Search Topics & Diagrams (⌘K)"
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-black/50 hover:bg-black/70 border border-white/10 hover:border-teal-400/40 text-slate-300 hover:text-white cursor-pointer transition-all shrink-0"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-black/50 hover:bg-black/70 border border-white/10 hover:border-amber-400/40 text-slate-300 hover:text-white cursor-pointer transition-all shrink-0"
             >
-              <Search className="w-3.5 h-3.5 text-teal-400" />
-              <span className="text-[11px] font-medium text-slate-300 hidden md:inline">Search</span>
-              <kbd className="inline-flex items-center px-1 py-0.2 rounded text-[9px] font-mono font-bold text-teal-300 bg-teal-500/15 border border-teal-400/25">
+              <Search className="w-3.5 h-3.5 text-amber-400" />
+              <span className="text-xs font-medium text-slate-300 hidden md:inline">Search</span>
+              <kbd className="inline-flex items-center px-1 py-0.2 rounded text-[10px] font-mono font-bold text-amber-300 bg-amber-500/15 border border-amber-400/25">
                 ⌘K
               </kbd>
             </button>
@@ -310,7 +310,7 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
                 }`}
               >
                 <Zap className="w-3 h-3 text-amber-300" />
-                <span className="text-[11px]">Revise</span>
+                <span className="text-xs">Revise</span>
               </button>
               <button
                 onClick={() => setLearningPosture("learn-new")}
@@ -322,7 +322,7 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
                 }`}
               >
                 <BookOpen className="w-3 h-3 text-emerald-300" />
-                <span className="text-[11px]">Study</span>
+                <span className="text-xs">Study</span>
               </button>
             </div>
 
@@ -330,10 +330,10 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
             <button
               onClick={openExamSprint}
               title="Launch Timed Exam Sprint (⌘E)"
-              className="flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border bg-teal-500/15 text-teal-200 border-teal-400/35 hover:bg-teal-500/25 shadow-sm soft-button shrink-0"
+              className="flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border bg-amber-500/15 text-amber-200 border-amber-400/35 hover:bg-amber-500/25 shadow-sm soft-button shrink-0"
             >
-              <Timer className="w-3.5 h-3.5 text-teal-300 animate-pulse" />
-              <span className="text-[10px] font-mono text-teal-400/80">⌘E</span>
+              <Timer className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
+              <span className="text-xs font-mono text-amber-400/80">⌘E</span>
             </button>
 
             {/* Pro 3-Column Analytical Inspector Toggle (Shown only when tucked away to prevent collision) */}
@@ -341,10 +341,10 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
               <button
                 onClick={toggleInspector}
                 title="Unfold Analytical Inspector from Top Navigation Bar (⌘I)"
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border soft-button shrink-0 bg-teal-950/60 text-teal-300 border-teal-400/40 tucked-pill-beacon-teal"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border soft-button shrink-0 bg-amber-950/60 text-amber-300 border-amber-400/40"
               >
-                <TrendingUp className="w-3.5 h-3.5 text-teal-300" />
-                <span className="text-[10px] font-mono text-teal-400/80">⌘I</span>
+                <TrendingUp className="w-3.5 h-3.5 text-amber-300" />
+                <span className="text-xs font-mono text-amber-400/80">⌘I</span>
               </button>
             )}
 
@@ -371,9 +371,9 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
               <button
                 key={mode.id}
                 onClick={() => setViewMode(mode.id)}
-                className={`relative col-span-1 flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 px-1 rounded-xl text-[11px] 2xl:text-xs font-bold transition-colors cursor-pointer min-w-0 overflow-hidden ${
+                className={`relative col-span-1 flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 px-1 rounded-xl text-xs font-bold transition-colors cursor-pointer min-w-0 overflow-hidden ${
                   isActive
-                    ? "text-teal-200"
+                    ? "text-amber-200"
                     : "text-slate-400 hover:text-white hover:bg-white/5"
                 }`}
               >
@@ -381,10 +381,10 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
                   <motion.div
                     layoutId="activeNavTabIndicator"
                     transition={{ type: "spring", stiffness: 420, damping: 32 }}
-                    className="absolute inset-0 rounded-xl bg-teal-500/25 border border-teal-400/50 shadow-md shadow-teal-500/20 pointer-events-none"
+                    className="absolute inset-0 rounded-xl bg-amber-500/25 border border-amber-400/50 shadow-md shadow-amber-500/20 pointer-events-none"
                   />
                 )}
-                <span className={`relative z-10 ${isActive ? "text-teal-300 shrink-0" : "text-slate-400 shrink-0"}`}>
+                <span className={`relative z-10 ${isActive ? "text-amber-300 shrink-0" : "text-slate-400 shrink-0"}`}>
                   {mode.icon}
                 </span>
                 <span className="relative z-10 text-xs truncate">{mode.shortLabel}</span>
@@ -398,7 +398,7 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
           isOpen={isShortcutsOpen}
           onClose={() => setIsShortcutsOpen(false)}
           appName="IB Economics SL Codex"
-          accentColor="#0d9488"
+          accentColor="#d97706"
           onOpenTour={onOpenWalkthrough}
         />
       </header>

@@ -96,6 +96,24 @@ export default function IBEconomicsSLStudyDashboardPage() {
     return cleanup;
   }, []);
 
+  // Fluid layout window adaptation on dynamic resize and full-screen toggles
+  useEffect(() => {
+    const handleResize = () => {
+      if (typeof window === "undefined") return;
+      const width = window.innerWidth;
+      const store = useStudyStore.getState();
+      if (width < 1024) {
+        if (!store.sidebarCollapsed) store.toggleSidebar();
+      }
+      if (width < 1280) {
+        if (store.isInspectorOpen) store.toggleInspector();
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   // Global Keyboard Shortcut: Cmd/Ctrl + I to toggle Analytical Inspector, Cmd/Ctrl + E to toggle Exam Sprint
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -222,7 +240,7 @@ export default function IBEconomicsSLStudyDashboardPage() {
 
       {/* 2. Main Study Dashboard - Buttery Liquid Glass reveal into main view */}
       <div
-        className={`mac-dashboard-shell ${showMainUI ? "app-revealed" : ""} transition-opacity duration-700 ease-out ${
+        className={`relative min-h-screen w-full bg-[#060402] overflow-x-hidden text-slate-100 transition-opacity duration-700 ease-out ${
           showMainUI
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none select-none"
@@ -230,13 +248,13 @@ export default function IBEconomicsSLStudyDashboardPage() {
       >
         <AmbientAuroraCanvas />
         {/* ==================== MAIN SHELL CONTAINER ==================== */}
-        <div className="relative z-10 w-full flex flex-col lg:flex-row gap-4 xl:gap-5 items-start">
+        <div className="max-w-[1720px] mx-auto p-2.5 sm:p-4 flex gap-4 xl:gap-5 items-start mac-dashboard-shell relative z-10">
           {/* Left Floating Sidebar */}
           <FloatingSidebar isMobileSheet={false} />
 
         {/* Right Main Content Workspace */}
         <main
-          className="flex-1 min-w-0 w-full pb-36 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          className="flex-1 min-w-0 w-full pb-36 flex flex-col transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
           style={{ containerType: "inline-size" }}
         >
           {/* Top Command & View Switcher Bar (Unified Long Bar) */}
@@ -256,11 +274,11 @@ export default function IBEconomicsSLStudyDashboardPage() {
                 {/* Unit Context Banner - 100% Full-Width Bulletproof Native Card */}
                 <div className="liquid-glass-bento rounded-3xl p-5 mb-5 border border-white/15 shadow-xl bg-gradient-to-br from-white/[0.07] to-white/[0.02] backdrop-blur-xl space-y-3">
                   <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2.5">
-                    <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-sky-300">
-                      <BookOpen className="w-4 h-4 shrink-0 text-sky-400" />
+                    <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-amber-300">
+                      <BookOpen className="w-4 h-4 shrink-0 text-amber-400" />
                       <span className="font-bold text-sm text-white">{activeUnit.title}</span>
                     </div>
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-sky-400/15 text-sky-300 border border-sky-400/30">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-500/15 text-amber-300 border border-amber-400/30">
                       {activeUnit.strategicArc}
                     </span>
                   </div>
@@ -288,38 +306,40 @@ export default function IBEconomicsSLStudyDashboardPage() {
                       <div className="text-base sm:text-lg font-bold text-white">
                         {nextTopic.displayCode}: {nextTopic.title}
                       </div>
-                      <div className="text-xs text-sky-300">
+                      <div className="text-xs text-amber-300">
                         {nextTopic.readingTimeMinutes} min speed-read • {nextTopic.subSections.length} core sections
                       </div>
                     </div>
 
-                    <ChromaticButton
-                      onClick={() => {
-                        setActiveTopic(nextTopic.id);
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }}
-                      color="#00802f"
-                      colorMode="spectrum"
-                      speed={0.7}
-                      paused={false}
-                      phase={0}
-                      feather={100}
-                      projectionScale={174.7}
-                      intensity={1.4}
-                      grain={0.105}
-                      seed={7}
-                      borderRadius={50}
-                      hoverEffect="brighten"
-                      entrance="blur-up"
-                      entranceSpeed={1}
-                      entranceBlur={10}
-                      entranceDistance={20}
-                      entranceScale={0.65}
-                      className="!min-w-[240px] !h-12 !px-6 !text-xs font-bold shadow-xl cursor-pointer"
-                    >
-                      <span>Advance to Topic {nextTopic.displayCode}</span>
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </ChromaticButton>
+                    <div className="flex items-center gap-2.5 shrink-0 w-full sm:w-auto">
+                      <ChromaticButton
+                        onClick={() => {
+                          setActiveTopic(nextTopic.id);
+                          window.scrollTo({ top: 0, behavior: "smooth" });
+                        }}
+                        color="#d97706"
+                        colorMode="spectrum"
+                        speed={0.7}
+                        paused={false}
+                        phase={0}
+                        feather={100}
+                        projectionScale={174.7}
+                        intensity={1.4}
+                        grain={0.105}
+                        seed={7}
+                        borderRadius={50}
+                        hoverEffect="brighten"
+                        entrance="blur-up"
+                        entranceSpeed={1}
+                        entranceBlur={10}
+                        entranceDistance={20}
+                        entranceScale={0.65}
+                        className="w-full sm:w-auto !min-w-[200px] sm:!min-w-[240px] !h-12 !px-6 !text-xs font-bold shadow-xl cursor-pointer"
+                      >
+                        <span>Advance to Topic {nextTopic.displayCode}</span>
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </ChromaticButton>
+                    </div>
                   </div>
                 )}
               </div>
@@ -335,7 +355,7 @@ export default function IBEconomicsSLStudyDashboardPage() {
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <div>
                       <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                        <Layers className="w-5 h-5 text-sky-400" /> Continuous Syllabus Stream
+                        <Layers className="w-5 h-5 text-amber-400" /> Continuous Syllabus Stream
                       </h2>
                       <p className="text-xs text-slate-300 mt-0.5">
                         Seamlessly read through all 4 syllabus units from introduction to international trade.
@@ -376,7 +396,7 @@ export default function IBEconomicsSLStudyDashboardPage() {
                         className="p-3.5 rounded-2xl bg-slate-950/55 border border-white/10"
                       >
                         <div className="flex items-center justify-between mb-1">
-                          <span className="font-mono text-[11px] font-bold text-sky-300 uppercase">
+                          <span className="font-mono text-[11px] font-bold text-amber-300 uppercase">
                             {u.badge}
                           </span>
                           <span className="font-mono text-[10px] text-slate-400">
@@ -389,7 +409,7 @@ export default function IBEconomicsSLStudyDashboardPage() {
                         <p className="text-[11px] text-slate-300 leading-relaxed mb-2 line-clamp-3">
                           {u.overview}
                         </p>
-                        <p className="text-[10px] font-mono text-blue-300/90 line-clamp-1">
+                        <p className="text-[10px] font-mono text-amber-300/90 line-clamp-1">
                           {u.strategicArc}
                         </p>
                       </div>
@@ -421,7 +441,7 @@ export default function IBEconomicsSLStudyDashboardPage() {
                         setSearchQuery("");
                         setActiveUnitFilter("all");
                       }}
-                      className="liquid-glass-pill px-4 py-2 rounded-xl text-xs font-mono text-sky-300 cursor-pointer"
+                      className="liquid-glass-pill px-4 py-2 rounded-xl text-xs font-mono text-amber-300 cursor-pointer"
                     >
                       Reset Filters
                     </button>

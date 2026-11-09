@@ -74,6 +74,7 @@ interface StudyStoreState {
   toggleSpeedReadMode: () => void;
   setSearchQuery: (query: string) => void;
   toggleSidebar: () => void;
+  setSidebarCollapsed: (collapsed: boolean) => void;
   setUnitSheetOpen: (open: boolean) => void;
   setQrModalOpen: (open: boolean) => void;
   setDiagnosticsModalOpen: (open: boolean) => void;
@@ -166,6 +167,7 @@ export const useStudyStore = create<StudyStoreState>()(
       setSearchQuery: (query) => set({ searchQuery: query }),
       toggleSidebar: () =>
         set((state) => ({ sidebarCollapsed: !state.sidebarCollapsed })),
+      setSidebarCollapsed: (collapsed) => set({ sidebarCollapsed: collapsed }),
       setUnitSheetOpen: (open) => set({ unitSheetOpen: open }),
       setQrModalOpen: (open) => set({ qrModalOpen: open }),
       setDiagnosticsModalOpen: (open) => set({ diagnosticsModalOpen: open }),

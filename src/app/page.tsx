@@ -21,7 +21,6 @@ import { ImmersiveAppWalkthrough } from "@/components/ImmersiveAppWalkthrough";
 import { EconomicsRightInspector } from "@/components/EconomicsRightInspector";
 import { TimedExamSprintModal } from "@/components/TimedExamSprintModal";
 import { JellySpotlightModal } from "@/components/JellySpotlightModal";
-import { ChromaticButton } from "@/components/chromatic-button";
 import { ALL_TOPICS, SYLLABUS_UNITS, UnitId } from "@/data";
 import { useStudyStore } from "@/store/useStudyStore";
 import {
@@ -98,16 +97,20 @@ export default function IBEconomicsSLStudyDashboardPage() {
 
   // Fluid layout window adaptation on dynamic resize and full-screen toggles
   useEffect(() => {
+    let prevWidth = typeof window !== "undefined" ? window.innerWidth : 1440;
     const handleResize = () => {
       if (typeof window === "undefined") return;
       const width = window.innerWidth;
       const store = useStudyStore.getState();
-      if (width < 1024) {
-        if (!store.sidebarCollapsed) store.toggleSidebar();
+      if (width < 1024 && prevWidth >= 1024) {
+        store.setSidebarCollapsed(true);
+      } else if (width >= 1024 && prevWidth < 1024) {
+        store.setSidebarCollapsed(false);
       }
-      if (width < 1280) {
-        if (store.isInspectorOpen) store.toggleInspector();
+      if (width < 1280 && prevWidth >= 1280) {
+        if (store.isInspectorOpen) store.setInspectorOpen(false);
       }
+      prevWidth = width;
     };
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -312,33 +315,16 @@ export default function IBEconomicsSLStudyDashboardPage() {
                     </div>
 
                     <div className="flex items-center gap-2.5 shrink-0 w-full sm:w-auto">
-                      <ChromaticButton
+                      <button
                         onClick={() => {
                           setActiveTopic(nextTopic.id);
                           window.scrollTo({ top: 0, behavior: "smooth" });
                         }}
-                        color="#d97706"
-                        colorMode="spectrum"
-                        speed={0.7}
-                        paused={false}
-                        phase={0}
-                        feather={100}
-                        projectionScale={174.7}
-                        intensity={1.4}
-                        grain={0.105}
-                        seed={7}
-                        borderRadius={50}
-                        hoverEffect="brighten"
-                        entrance="blur-up"
-                        entranceSpeed={1}
-                        entranceBlur={10}
-                        entranceDistance={20}
-                        entranceScale={0.65}
-                        className="w-full sm:w-auto !min-w-[200px] sm:!min-w-[240px] !h-12 !px-6 !text-xs font-bold shadow-xl cursor-pointer"
+                        className="w-full sm:w-auto min-w-[200px] sm:min-w-[240px] h-12 px-6 rounded-full text-xs font-bold transition-all duration-200 cursor-pointer border bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 border-amber-400/40 shadow-lg shadow-amber-500/10 active:scale-95 flex items-center justify-center gap-2 group"
                       >
                         <span>Advance to Topic {nextTopic.displayCode}</span>
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                      </ChromaticButton>
+                        <ArrowRight className="w-4 h-4 text-amber-300 group-hover:translate-x-0.5 transition-transform" />
+                      </button>
                     </div>
                   </div>
                 )}
@@ -531,6 +517,9 @@ export default function IBEconomicsSLStudyDashboardPage() {
         onClose={closeExamSprint}
         topic={activeTopic}
       />
+
+      {/* iPadOS / Mobile Touch Syllabus Drawer Sheet */}
+      <FloatingSidebar isMobileSheet={true} />
 
       {/* Flagship Jelly Spotlight Search Modal (Raycast Ergonomics) */}
       <JellySpotlightModal

@@ -333,18 +333,18 @@ export const FloatingSidebar: React.FC<FloatingSidebarProps> = React.memo(({
     </>
   );
 
-  // If Mobile Sheet
+  // If Mobile / iPadOS Sheet
   if (isMobileSheet) {
     return (
       <div
-        className="fixed inset-0 z-50 flex items-end justify-center bg-black/70 backdrop-blur-sm"
+        className="fixed inset-0 z-50 flex items-end justify-center bg-black/75 backdrop-blur-md transition-opacity duration-300"
         onClick={() => setUnitSheetOpen(false)}
       >
         <aside
           onClick={(e) => e.stopPropagation()}
-          className="w-full max-w-[420px] max-h-[85dvh] flex flex-col liquid-glass-sheet rounded-t-3xl p-4 pb-[calc(1rem+env(safe-area-inset-bottom,0px))] overflow-hidden select-none"
+          className="w-full max-w-[560px] md:max-w-[640px] max-h-[88dvh] flex flex-col liquid-glass-sheet rounded-t-3xl p-5 pb-[calc(1.5rem+env(safe-area-inset-bottom,0px))] overflow-hidden select-none border border-white/15 shadow-2xl"
         >
-          <div className="w-10 h-1.5 rounded-full bg-white/25 mx-auto mb-3 shrink-0" />
+          <div className="w-12 h-1.5 rounded-full bg-white/30 mx-auto mb-3 shrink-0" />
           {content}
         </aside>
       </div>

@@ -33,7 +33,6 @@ import {
 } from "lucide-react";
 import { ALL_TOPICS } from "@/data";
 import { useStudyStore, ViewMode, AcademicStyle } from "@/store/useStudyStore";
-import { ChromaticButton } from "./chromatic-button";
 import { KeyboardShortcutsModal } from "./KeyboardShortcutsModal";
 import { IBEconomicsAppLogo } from "./IBEconomicsAppLogo";
 
@@ -126,6 +125,7 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
     toggleTimerRunning,
     resetTimer,
     setDiagnosticsModalOpen,
+    unitSheetOpen,
     setUnitSheetOpen,
     completedTopics,
     setActiveTopic,
@@ -240,6 +240,14 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
 
   const currentAcademicFont = academicStyle || "jakarta";
 
+  const handleToggleSidebar = () => {
+    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+      setUnitSheetOpen(!unitSheetOpen);
+    } else {
+      toggleSidebar();
+    }
+  };
+
   return (
     <>
       <header
@@ -250,12 +258,16 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
         <div className="flex items-center justify-between gap-2 w-full pb-2 border-b border-white/10 min-h-[42px] max-w-full overflow-hidden">
           {/* Brand & Breadcrumbs (Left: Flexible, shrinks cleanly without pushing controls) */}
           <div className="flex items-center gap-2 min-w-0 shrink mac-no-drag">
-            {/* Native macOS Sidebar Toggle (⌘B) */}
+            {/* Native macOS / iPadOS Sidebar Toggle (⌘B) */}
             <button
-              onClick={toggleSidebar}
-              title={sidebarCollapsed ? "Expand Topic Navigation Sidebar (⌘B)" : "Collapse Sidebar for Wide View (⌘B)"}
-              className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all cursor-pointer soft-button shrink-0 border ${
+              onClick={handleToggleSidebar}
+              title={
                 sidebarCollapsed
+                  ? "Expand Topic Navigation Sidebar (⌘B)"
+                  : "Collapse Sidebar for Wide View (⌘B)"
+              }
+              className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all cursor-pointer soft-button shrink-0 border ${
+                unitSheetOpen || (!sidebarCollapsed && typeof window !== "undefined" && window.innerWidth >= 1024)
                   ? "bg-amber-500/20 text-amber-300 border-amber-400/40 shadow-sm"
                   : "bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border-white/10"
               }`}

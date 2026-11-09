@@ -113,14 +113,48 @@ p, blockquote {
   overflow-wrap: break-word;
 }
 
-/* ==================== MAC WIDESCREEN & IPHONE 16e VIEWPORT SHELLS ==================== */
+/* ==================== MAC WIDESCREEN & IPADOS TABLET VIEWPORT SHELLS ==================== */
 .mac-dashboard-shell {
   width: 100%;
   max-width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   margin-inline: auto;
-  padding: 1.25rem 1.25rem 5rem;
+  padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
+  padding-bottom: max(5rem, calc(4rem + env(safe-area-inset-bottom, 0px)));
+  padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
+  padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
   position: relative;
+}
+
+/* iPadOS & iOS Native Ergonomics & Touch Acceleration */
+@supports (-webkit-touch-callout: none) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button,
+  a,
+  [role="button"],
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+  }
+  /* Prevent accidental text highlight on interactive chrome while permitting reading selection on study text */
+  button,
+  nav,
+  .liquid-glass-sidebar,
+  .liquid-glass-long-bar {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  article,
+  p,
+  .academic-notebook-surface,
+  .katex-formula-wrapper {
+    -webkit-user-select: text;
+    user-select: text;
+  }
 }
 
 /* ==================== NATIVE MACOS WINDOW DRAG REGION ==================== */

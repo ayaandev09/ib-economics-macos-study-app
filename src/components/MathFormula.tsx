@@ -11,32 +11,33 @@ interface MathFormulaProps {
 
 /**
  * Robust LaTeX sanitizer that restores control characters that might have been
- * mangled by JavaScript string escaping (e.g. \f = form feed, \t = tab).
+ * mangled by JavaScript string escaping (e.g. \f = form feed, \t = tab, \b = backspace).
+ * Uses strict negative lookbehind to NEVER double-escape or mutilate valid LaTeX commands.
  */
-function sanitizeLaTeX(raw: string): string {
+export function sanitizeLaTeX(raw: string): string {
   if (!raw) return "";
   let clean = raw;
 
-  // 1. Fix common JS escape collision artifacts
+  // 1. Remove form-feed / carriage control / tofu mangling
+  clean = clean.replace(/\\+backslash\\+text\{\s*f\s*\}\s*\\+frac/g, "\\frac");
+  clean = clean.replace(/\\+text\{\s*f\s*\}\s*\\+frac/g, "\\frac");
+  clean = clean.replace(/\\+f(?=\\+frac)/g, "");
+  clean = clean.replace(/\\+f\\+frac/g, "\\frac");
+  clean = clean.replace(/\^\\+circ(?=[^a-zA-Z\{]|$)/g, "^{\\circ}");
   clean = clean.replace(/[\x0c\u000c]rac/gi, "\\frac");
   clean = clean.replace(/[\x09\u0009]ext/gi, "\\text");
   clean = clean.replace(/[\x09\u0009]imes/gi, "\\times");
+  clean = clean.replace(/[\x09\u0009]au/gi, "\\tau");
+  clean = clean.replace(/[\x09\u0009]heta/gi, "\\theta");
+  clean = clean.replace(/[\x08\u0008]eta/gi, "\\beta");
   clean = clean.replace(/[\x00-\x1f]/g, " ");
+  clean = clean.replace(/⧈rac/g, "\\frac");
+  clean = clean.replace(/⧈/g, "");
 
-  // 2. Fix unescaped backslashes where word started without slash
-  clean = clean.replace(/(^|[^\\])frac\{/g, "$1\\frac{");
-  clean = clean.replace(/(^|[^\\])text\{/g, "$1\\text{");
-  clean = clean.replace(/(^|[^\\])times(\b|[^a-zA-Z])/g, "$1\\times$2");
-  clean = clean.replace(/(^|[^\\])Delta(\b|[^a-zA-Z])/g, "$1\\Delta$2");
-  clean = clean.replace(/(^|[^\\])quad(\b|[^a-zA-Z])/g, "$1\\quad$2");
-  clean = clean.replace(/(^|[^\\])sqrt/g, "$1\\sqrt");
+  // 2. Fix unescaped keywords and mathematical functions
+  clean = clean.replace(/(?<!\\)\b(frac|sqrt|theta|lambda|Delta|times|approx|propto|mu|sigma|omega|epsilon|pi|tau|beta|rho|vec|implies|quad|cos|sin|tan|ln|log|exp|Sigma|Omega|alpha|gamma|phi|psi|eta|hbar|begin|end)\b/g, "\\$1");
 
-  // 3. Catch words that lost initial letter e.g. "ext{" -> "\text{", "rac{" -> "\frac{"
-  clean = clean.replace(/(^|\s|[^\\])ext\{/g, "$1\\text{");
-  clean = clean.replace(/(^|\s|[^\\])rac\{/g, "$1\\frac{");
-  clean = clean.replace(/(^|\s|[^\\])imes(\b|\s|\d)/g, "$1\\times $2");
-
-  return clean;
+  return clean.trim();
 }
 
 // Global in-memory cache for rendered KaTeX formula HTML strings

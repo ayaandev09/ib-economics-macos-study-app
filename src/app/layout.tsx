@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "katex/dist/katex.min.css";
 import "./globals.css";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export const metadata: Metadata = {
   title: "IB Economics SL — Liquid Glass Study Dashboard & Diagram Studio",
@@ -22,8 +23,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark" data-academic-font="jakarta" data-handwritten-style="jakarta">
+    <html suppressHydrationWarning lang="en" className="dark" data-academic-font="jakarta" data-handwritten-style="jakarta">
       <head>
+        <script dangerouslySetInnerHTML={{ __html: `try{if(localStorage.getItem("study-app-theme")==="light"){document.documentElement.classList.add("theme-light")}}catch(e){}` }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -37,6 +39,7 @@ export default function RootLayout({
       </head>
       <body className="bg-[#060402] text-slate-100 antialiased selection:bg-amber-500/30 selection:text-amber-100 min-h-screen">
         {children}
+        <ThemeToggle />
       </body>
     </html>
   );

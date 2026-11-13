@@ -30,6 +30,7 @@ import {
   Timer,
   Keyboard,
   PanelLeft,
+  Sparkles,
 } from "lucide-react";
 import { ALL_TOPICS } from "@/data";
 import { useStudyStore, ViewMode, AcademicStyle } from "@/store/useStudyStore";
@@ -252,160 +253,52 @@ export const TopCommandBar: React.FC<TopCommandBarProps> = ({
     <>
       <header
         data-tour="command-bar"
-        className="liquid-glass-long-bar !rounded-3xl overflow-hidden p-2.5 sm:p-3 mb-3 flex flex-col gap-2 shadow-xl relative mac-drag-region transition-all z-20 w-full max-w-full"
+        className="liquid-glass-bar relative z-20 w-full max-w-full rounded-full px-2.5 py-2 mb-3 flex items-center justify-between gap-2 mac-drag-region"
       >
-        {/* Top Segment: Brand (Left) & Controls/Actions (Right) */}
-        <div className="flex items-center justify-between gap-2 w-full pb-2 border-b border-white/10 min-h-[42px] max-w-full overflow-hidden">
-          {/* Brand & Breadcrumbs (Left: Flexible, shrinks cleanly without pushing controls) */}
-          <div className="flex items-center gap-2 min-w-0 shrink mac-no-drag">
-            {/* Native macOS / iPadOS Sidebar Toggle (⌘B) */}
-            <button
-              onClick={handleToggleSidebar}
-              title={
-                sidebarCollapsed
-                  ? "Expand Topic Navigation Sidebar (⌘B)"
-                  : "Collapse Sidebar for Wide View (⌘B)"
-              }
-              className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all cursor-pointer soft-button shrink-0 border ${
-                unitSheetOpen || (!sidebarCollapsed && typeof window !== "undefined" && window.innerWidth >= 1024)
-                  ? "bg-amber-500/20 text-amber-300 border-amber-400/40 shadow-sm"
-                  : "bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white border-white/10"
-              }`}
-            >
-              <PanelLeft className="w-4 h-4" />
-            </button>
-
-            {/* Brand Logo & Title */}
-            <button
-              onClick={() => setDiagnosticsModalOpen(true)}
-              title="Click to run live Economics SL Diagnostics"
-              className="flex items-center gap-2 min-w-0 text-left cursor-pointer group"
-            >
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-500/25 via-red-950/20 to-emerald-500/25 border border-amber-400/40 flex items-center justify-center p-1 shadow-md relative shrink-0 group-hover:scale-105 transition-transform overflow-hidden">
-                <IBEconomicsAppLogo className="w-full h-full object-contain" />
-              </div>
-              <div className="min-w-0 leading-tight">
-                <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-amber-400 uppercase block truncate">
-                  EQUILIBRIUM // IB ECON SL
-                </span>
-                <span className="text-xs sm:text-sm font-semibold text-white tracking-tight block truncate">
-                  Economics SL Codex
-                </span>
-              </div>
-            </button>
-          </div>
-
-          {/* Right Section: Compact Ergonomic Modality Switchers & Action Pills (Max ~280px total) */}
-          <div className="flex items-center justify-end gap-1.5 shrink-0 mac-no-drag">
-            {/* Quick Spotlight Trigger Button */}
-            <button
-              onClick={openSpotlight}
-              title="Search Topics & Diagrams (⌘K)"
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-black/50 hover:bg-black/70 border border-white/10 hover:border-amber-400/40 text-slate-300 hover:text-white cursor-pointer transition-all shrink-0"
-            >
-              <Search className="w-3.5 h-3.5 text-amber-400" />
-              <span className="text-xs font-medium text-slate-300 hidden md:inline">Search</span>
-              <kbd className="inline-flex items-center px-1 py-0.2 rounded text-[10px] font-mono font-bold text-amber-300 bg-amber-500/15 border border-amber-400/25">
-                ⌘K
-              </kbd>
-            </button>
-
-            {/* Study Goal / Posture Switcher: Revision vs Study (Compact Segmented Pill) */}
-            <div className="flex items-center p-0.5 rounded-full bg-black/60 border border-white/12 text-xs shrink-0">
-              <button
-                onClick={() => setLearningPosture("pre-lesson-cram")}
-                title="Pre-lesson cramming, exam traps & active recall"
-                className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                  learningPosture === "pre-lesson-cram"
-                    ? "bg-amber-500/25 text-amber-200 border border-amber-400/40 shadow-sm"
-                    : "text-slate-400 hover:text-slate-200"
-                }`}
-              >
-                <Zap className="w-3 h-3 text-amber-300" />
-                <span className="text-xs">Revise</span>
-              </button>
-              <button
-                onClick={() => setLearningPosture("learn-new")}
-                title="First-time guided study with conceptual breakdown"
-                className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                  learningPosture === "learn-new"
-                    ? "bg-emerald-500/25 text-emerald-200 border border-emerald-400/40 shadow-sm"
-                    : "text-slate-400 hover:text-slate-200"
-                }`}
-              >
-                <BookOpen className="w-3 h-3 text-emerald-300" />
-                <span className="text-xs">Study</span>
-              </button>
-            </div>
-
-            {/* Timed Exam Sprint Button */}
-            <button
-              onClick={openExamSprint}
-              title="Launch Timed Exam Sprint (⌘E)"
-              className="flex items-center gap-1 px-2.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border bg-amber-500/15 text-amber-200 border-amber-400/35 hover:bg-amber-500/25 shadow-sm soft-button shrink-0"
-            >
-              <Timer className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
-              <span className="text-xs font-mono text-amber-400/80">⌘E</span>
-            </button>
-
-            {/* Pro 3-Column Analytical Inspector Toggle (Shown only when tucked away to prevent collision) */}
-            {!isInspectorOpen && (
-              <button
-                onClick={toggleInspector}
-                title="Unfold Analytical Inspector from Top Navigation Bar (⌘I)"
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer border soft-button shrink-0 bg-amber-950/60 text-amber-300 border-amber-400/40"
-              >
-                <TrendingUp className="w-3.5 h-3.5 text-amber-300" />
-                <span className="text-xs font-mono text-amber-400/80">⌘I</span>
-              </button>
-            )}
-
-            {/* Native Shortcuts Cheatsheet Guide (?) */}
-            <button
-              onClick={() => setIsShortcutsOpen((prev) => !prev)}
-              title="Keyboard Shortcuts Cheatsheet (?)"
-              className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full text-xs font-bold transition-all cursor-pointer border bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white border-white/10 shadow-sm soft-button shrink-0"
-            >
-              <span className="text-xs font-mono font-bold text-slate-300">?</span>
-            </button>
-          </div>
+        <div className="flex items-center gap-2 min-w-0 mac-no-drag">
+          <button
+            onClick={handleToggleSidebar}
+            title="Toggle sidebar (⌘B)"
+            aria-label="Toggle sidebar"
+            className={`w-9 h-9 rounded-full flex items-center justify-center cursor-pointer border transition-colors shrink-0 ${
+              sidebarCollapsed
+                ? "bg-amber-500/25 border-amber-300/50 text-amber-200"
+                : "bg-white/[0.07] hover:bg-white/[0.14] border-white/15 text-slate-300"
+            }`}
+          >
+            <PanelLeft className="w-4 h-4" />
+          </button>
+          <p className="text-sm font-semibold text-white truncate pl-1">
+            {viewMode === "home" ? "Home" : NAV_MODES.find((m) => m.id === viewMode)?.label ?? "IB Economics"}
+          </p>
         </div>
 
-        {/* Row 2: Dedicated Symmetrical Navigation Grid — 100% Adaptive to Any Mac */}
-        <nav
-          data-tour="nav-tabs"
-          aria-label="Integrated Main Sections Bar"
-          className="w-full grid grid-cols-4 sm:grid-cols-8 gap-1 p-1 bg-black/60 border border-white/12 rounded-2xl shadow-inner relative max-w-full overflow-hidden"
-        >
-          {NAV_MODES.map((mode) => {
-            const isActive = viewMode === mode.id;
-            return (
-              <button
-                key={mode.id}
-                onClick={() => setViewMode(mode.id)}
-                className={`relative col-span-1 flex items-center justify-center gap-1 sm:gap-1.5 py-1.5 sm:py-2 px-1 rounded-xl text-xs font-bold transition-colors cursor-pointer min-w-0 overflow-hidden ${
-                  isActive
-                    ? "text-amber-200"
-                    : "text-slate-400 hover:text-white hover:bg-white/5"
-                }`}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeNavTabIndicator"
-                    transition={{ type: "spring", stiffness: 420, damping: 32 }}
-                    className="absolute inset-0 rounded-xl bg-amber-500/25 border border-amber-400/50 shadow-md shadow-amber-500/20 pointer-events-none"
-                  />
-                )}
-                <span className={`relative z-10 ${isActive ? "text-amber-300 shrink-0" : "text-slate-400 shrink-0"}`}>
-                  {mode.icon}
-                </span>
-                <span className="relative z-10 text-xs truncate">{mode.shortLabel}</span>
-              </button>
-            );
-          })}
-        </nav>
+        <div className="flex items-center gap-1.5 mac-no-drag">
+          <button onClick={openSpotlight} title="Search (⌘K)" className="flex items-center gap-1.5 h-9 px-3 rounded-full text-xs font-medium cursor-pointer transition-colors bg-white/[0.07] hover:bg-white/[0.14] border border-white/15 text-slate-200 shrink-0">
+            <Search className="w-3.5 h-3.5 text-amber-300" />
+            <span className="hidden md:inline">Search</span>
+            <kbd className="hidden md:inline text-[10px] font-mono text-slate-400">⌘K</kbd>
+          </button>
+          <button onClick={openExamSprint} title="Timed sprint (⌘E)" className="flex items-center gap-1.5 h-9 px-3 rounded-full text-xs font-medium cursor-pointer transition-colors bg-white/[0.07] hover:bg-white/[0.14] border border-white/15 text-slate-200 shrink-0">
+            <Timer className="w-3.5 h-3.5 text-amber-300" />
+            <span className="hidden lg:inline">Sprint</span>
+          </button>
+          {!isInspectorOpen && (
+            <button onClick={toggleInspector} title="Analysis panel (⌘I)" className="flex items-center gap-1.5 h-9 px-3 rounded-full text-xs font-medium cursor-pointer transition-colors bg-white/[0.07] hover:bg-white/[0.14] border border-white/15 text-slate-200 shrink-0">
+              <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+              <span className="hidden lg:inline">Analysis</span>
+            </button>
+          )}
+          <button
+            onClick={() => setIsShortcutsOpen((prev) => !prev)}
+            title="Keyboard shortcuts (?)"
+            aria-label="Keyboard shortcuts"
+            className="w-9 h-9 rounded-full flex items-center justify-center cursor-pointer border bg-white/[0.07] hover:bg-white/[0.14] border-white/15 text-slate-300 text-xs font-mono shrink-0"
+          >
+            ?
+          </button>
+        </div>
 
-        {/* Global Native Keyboard Shortcuts Cheatsheet Modal */}
         <KeyboardShortcutsModal
           isOpen={isShortcutsOpen}
           onClose={() => setIsShortcutsOpen(false)}

@@ -4,6 +4,9 @@ import React, { useMemo, useEffect, useState, useCallback } from "react";
 import { AnimatePresence } from "framer-motion";
 import { AmbientAuroraCanvas } from "@/components/AmbientAuroraCanvas";
 import { FloatingSidebar } from "@/components/FloatingSidebar";
+import { SideNav } from "@/components/SideNav";
+import { SceneSwitcher } from "@/components/SceneSwitcher";
+import { HomeDashboard } from "@/components/HomeDashboard";
 import { TopCommandBar } from "@/components/TopCommandBar";
 import { WidgetBridge } from "@/components/WidgetBridge";
 import { StudyMiniHomepage } from "@/components/StudyMiniHomepage";
@@ -253,7 +256,7 @@ export default function IBEconomicsSLStudyDashboardPage() {
         {/* ==================== MAIN SHELL CONTAINER ==================== */}
         <div className="max-w-[1720px] mx-auto p-2.5 sm:p-4 flex gap-4 xl:gap-5 items-start mac-dashboard-shell relative z-10">
           {/* Left Floating Sidebar */}
-          <FloatingSidebar isMobileSheet={false} />
+          <SideNav />
 
         {/* Right Main Content Workspace */}
         <main
@@ -265,15 +268,18 @@ export default function IBEconomicsSLStudyDashboardPage() {
           <TopCommandBar onOpenWalkthrough={() => setIsWalkthroughOpen(true)} />
 
           {/* Mini Homepage & Live Widget Telemetry Hub */}
-          <StudyMiniHomepage />
+          
 
           {/* ==================== BUTTER-SMOOTH VIEW CONTENT WORKSPACE ==================== */}
           <div key={viewMode} className="liquid-view-enter">
             {/* ===============================================================
                 MODE 1: SINGLE TOPIC BENTO CARD (FOCUS / HOME VIEW)
                 =============================================================== */}
+            {viewMode === "home" && <HomeDashboard />}
+
             {viewMode === "focus" && (
               <div className="space-y-5">
+                <SceneSwitcher />
                 {/* Unit Context Banner - 100% Full-Width Bulletproof Native Card */}
                 <div className="liquid-glass-bento rounded-3xl p-5 mb-5 border border-white/15 shadow-xl bg-gradient-to-br from-white/[0.07] to-white/[0.02] backdrop-blur-xl space-y-3">
                   <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-2.5">

@@ -6,6 +6,7 @@ import { UnitId, ConceptId } from "@/data/types";
 import { ALL_TOPICS } from "@/data";
 
 export type ViewMode =
+  | "home"
   | "focus"
   | "stream"
   | "diagrams"
@@ -118,7 +119,7 @@ export const useStudyStore = create<StudyStoreState>()(
       activeTopicId: "u1-1",
       activeUnitFilter: "all",
       activeConceptFilter: "all",
-      viewMode: "focus",
+      viewMode: "home",
       deviceMode: "mac",
       learningPosture: "learn-new",
       academicStyle: "jakarta",
@@ -128,7 +129,7 @@ export const useStudyStore = create<StudyStoreState>()(
       unitSheetOpen: false,
       qrModalOpen: false,
       diagnosticsModalOpen: false,
-      isInspectorOpen: true,
+      isInspectorOpen: false,
       isExamSprintActive: false,
       isSpotlightOpen: false,
       widgetTemplate: "medium",

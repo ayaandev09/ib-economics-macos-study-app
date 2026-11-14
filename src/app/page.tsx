@@ -47,6 +47,7 @@ export default function IBEconomicsSLStudyDashboardPage() {
     activeTopicId,
     setActiveTopic,
     viewMode,
+    setViewMode,
     searchQuery,
     setSearchQuery,
     activeUnitFilter,
@@ -409,16 +410,60 @@ export default function IBEconomicsSLStudyDashboardPage() {
                   </div>
                 </div>
 
-                {/* All Matching Topic Cards */}
+                {/* All Matching Topic Cards - Executive Digest (No text dump) */}
                 {filteredTopics.length > 0 ? (
-                  filteredTopics.map((t, idx) => (
-                    <TopicBentoCard
-                      key={t.id}
-                      topic={t}
-                      isDeferred={idx > 0}
-                      showPrevNextControls={false}
-                    />
-                  ))
+                  <div className="space-y-4">
+                    {filteredTopics.map((t) => {
+                      const isDone = !!completedTopics[t.id];
+                      return (
+                        <div
+                          key={t.id}
+                          className="liquid-glass-bento rounded-3xl p-5 border border-white/10 hover:border-amber-400/40 transition-all space-y-3"
+                        >
+                          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
+                            <div className="flex items-center gap-2">
+                              <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-400/35">
+                                {t.displayCode}
+                              </span>
+                              <h3 className="text-sm sm:text-base font-bold text-white tracking-tight">
+                                {t.title}
+                              </h3>
+                              <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-slate-300">
+                                {t.level}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="text-[11px] font-mono text-slate-400">
+                                {t.readingTimeMinutes} min read
+                              </span>
+                              <button
+                                onClick={() => {
+                                  setActiveTopic(t.id);
+                                  setViewMode("focus");
+                                }}
+                                className="px-3 py-1 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-xs cursor-pointer transition-colors"
+                              >
+                                Study Topic ➔
+                              </button>
+                            </div>
+                          </div>
+
+                          <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans">
+                            {t.summary}
+                          </p>
+
+                          <div className="pt-2 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs">
+                            <span className="text-slate-400">
+                              <strong className="text-amber-300">Syllabus Ref:</strong> {t.syllabusRef}
+                            </span>
+                            <span className="text-slate-400 font-mono text-[11px]">
+                              Strategic Priority: <span className="text-sky-300 font-bold">{t.strategicImportance}</span>
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 ) : (
                   <div className="liquid-glass-bento rounded-3xl p-12 text-center">
                     <SearchX className="w-8 h-8 text-rose-400 mx-auto mb-3" />
